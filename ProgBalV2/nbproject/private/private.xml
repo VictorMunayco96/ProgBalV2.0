@@ -4,8 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/gates/Documentos/GitHub/ProgBalV2.0/ProgBalV2/src/Presentacion/PDespacho.java</file>
+            <file>file:/home/gates/Documentos/GitHub/ProgBalV2.0/ProgBalV2/src/Datos/DDescProd.java</file>
+            <file>file:/home/gates/Documentos/GitHub/ProgBalV2.0/ProgBalV2/src/Datos/DProveClien.java</file>
             <file>file:/home/gates/Documentos/GitHub/ProgBalV2.0/ProgBalV2/src/progbalv2/ProgBalV2.java</file>
+            <file>file:/home/gates/Documentos/GitHub/ProgBalV2.0/ProgBalV2/src/Negocios/NDescProd.java</file>
+            <file>file:/home/gates/Documentos/GitHub/ProgBalV2.0/ProgBalV2/src/Negocios/NProveClien.java</file>
             <file>file:/home/gates/Documentos/GitHub/ProgBalV2.0/ProgBalV2/src/Presentacion/PPeso.java</file>
+            <file>file:/home/gates/Documentos/GitHub/ProgBalV2.0/ProgBalV2/src/Datos/Conexion.java</file>
         </group>
     </open-files>
 </project-private>

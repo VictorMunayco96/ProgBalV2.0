@@ -31,7 +31,7 @@ BEGIN
 
 in _IdProveClien int,
 in _RazonSocial varchar(70),
-in _Opcion varchar(1)
+in _Opcion varchar(4)
 
  )
 BEGIN
@@ -152,7 +152,7 @@ BEGIN
 
 in _IdDescProd int,
 in _DescProd varchar(60),
-in _Opcion varchar(1)
+in _Opcion varchar(4)
 
  )
 BEGIN
@@ -160,7 +160,7 @@ BEGIN
 
 
     select IdDescProd, DescProd from DescProd
-    order by IdDescProd desc
+    order by IdDescProd desc;
      
      
      End IF;
@@ -169,7 +169,7 @@ BEGIN
      
   select IdDescProd, DescProd from DescProd 
     where DescProd like concat('%',_DescProd,'%') 
-    order by IdDescProd desc
+    order by IdDescProd desc;
        
      
      End IF;
@@ -180,7 +180,7 @@ BEGIN
      
   select IdDescProd, DescProd from DescProd 
     where IdDescProd=_IdDescProd 
-    order by IdDescProd desc
+    order by IdDescProd desc;
        
      
      End IF;
