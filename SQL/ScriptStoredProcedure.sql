@@ -71,7 +71,7 @@ BEGIN
 
 in _IdProveClien int,
 in _RazonSocial varchar(70),
-in _Opcion varchar(1)
+in _Opcion varchar(4)
 
  )
 BEGIN
@@ -114,7 +114,7 @@ BEGIN
 in _IdDestinoBloq int,
 in _DestinoBloq varchar(45),
 in _CodDestinoBloq varchar(15),
-in _Opcion varchar(1)
+in _Opcion varchar(4)
 
  )
 BEGIN
@@ -122,9 +122,11 @@ BEGIN
 
 
     select DB.IdDestinoBloq, DB.DestinoBloq, DD.DestinoDes, D.Destino from Destino D 
-    inner join (DestinoDesc DD inner join DestinoBloq DB on DD.IdDestinoDesc=DB.IdDestinoDesc)
+    inner join (DestinoDesc DD 
+    inner join DestinoBloq DB 
+    on DD.IdDestinoDesc=DB.IdDestinoDesc) 
     on D.IdDestino=DD.IdDestino 
-    order by DB.IdDestinoBloq desc
+    order by IdDestinoBloq desc;
      
      
      End IF;
@@ -135,7 +137,7 @@ BEGIN
     inner join (DestinoDesc DD inner join DestinoBloq DB on DD.IdDestinoDesc=DB.IdDestinoDesc)
     on D.IdDestino=DD.IdDestino 
     where D.DestinoBloq like concat('%',_DestinoBloq,'%')
-    order by DB.IdDestinoBloq desc
+    order by DB.IdDestinoBloq desc;
      
      
      End IF;

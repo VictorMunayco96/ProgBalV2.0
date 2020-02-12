@@ -8,6 +8,8 @@ package Presentacion;
 import Datos.Conexion;
 import Library.DefaultValue;
 import Negocios.NDescProd;
+import Negocios.NDestinoBloq;
+import Negocios.NProveClien;
 //import Library.DefaultValue;
 //import Negocios.NConductorVehiculo;
 //import Negocios.NDestino;
@@ -142,9 +144,8 @@ public class PPeso extends javax.swing.JFrame {
     
     
 //    NConductorVehiculo NConductorVehiculo = new NConductorVehiculo();
+  
 
-//    NDestino NDestino = new NDestino();
-  NProveClien NProveClien = new NProveClien();
     
 Conexion Cn = new Conexion();
     Connection Con = Cn.Conexion();
@@ -228,61 +229,11 @@ Conexion Cn = new Conexion();
 
   
 
-    public void BusquedaIdProveClien() {
+ 
 
-        try {
-            PGetProveClien(DefaultValue.Text(TxtIdProveClien.getText()), "ID");
-
-            TxtIdProveClien.setText(TblProveClien.getValueAt(0, 0).toString());
-            TxtRazonSocial.setText(TblProveClien.getValueAt(0, 1).toString());
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(rootPane, "NO HAY REGISTRO", "MENSAJE", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
-
-    public void BusquedaIdDestino() {
-
-        try {
-//            PGetDestino(DefaultValue.Text(TxtIdDestino.getText()), "ID");
-
-            TxtIdDestino.setText(TblDestino.getValueAt(0, 0).toString());
-            TxtDestino.setText(TblDestino.getValueAt(0, 1).toString());
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(rootPane, "NO HAY REGISTRO", "MENSAJE", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
-
-    public void PGetProveClien(String TextBusqueda, String Accion) {
-
-        try {
-
-//            TblProveClien.setModel(NProveClien.NGetProveClien(DefaultValue.Number(TextBusqueda), DefaultValue.Text(TextBusqueda), DefaultValue.Number(TextBusqueda), Accion));
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null, "ERROR", "ERROR", JOptionPane.ERROR_MESSAGE);
-            System.out.println(e);
-        }
-    }
-
-    public void PGetDestino(String TextBusqueda, String Accion) {
-
-        try {
-
-//            TblDestino.setModel(NDestino.NGetDestino(DefaultValue.Number(TextBusqueda), DefaultValue.Text(TextBusqueda), Accion));
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null, "ERROR", "ERROR", JOptionPane.ERROR_MESSAGE);
-            System.out.println(e);
-        }
-    }
+    
+    
+    
  public void ColumHide(int Num, JTable Nom){
     
     Nom.getColumnModel().getColumn(Num).setMaxWidth(0);
@@ -294,17 +245,96 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
     }
  
  
+ 
+ 
+ 
+ 
   // <editor-fold defaultstate="collapsed" desc="ProveCliente"> 
  
+  NProveClien NProveClien = new NProveClien();
  
+     public void PGetProveClien(String TextBusqueda, String Accion) {
+
+        try {
+
+   TblProveClien.setModel(NProveClien.NGetProveClien(DefaultValue.Number(TextBusqueda), DefaultValue.Text(TextBusqueda), Accion));
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "ERROR", "ERROR", JOptionPane.ERROR_MESSAGE);
+            System.out.println(e);
+        }
+    }
  
- 
+     
+     
+       public void BusquedaIdProveClien() {
+
+        try {
+            PGetProveClien(DefaultValue.Text(TxtIdProveClien.getText()), "IDPR");
+
+            TxtIdProveClien.setText(TblProveClien.getValueAt(0, 0).toString());
+            TxtRazonSocial.setText(TblProveClien.getValueAt(0, 1).toString());
+            
+            
+            
+            
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(rootPane, "NO HAY REGISTRO", "MENSAJE", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+     
+     
+     
  
  // </editor-fold>  
  
  
+ // <editor-fold defaultstate="collapsed" desc="Destino">     
  
+         NDestinoBloq NDestinoBloq = new NDestinoBloq();
+         
+         
+            public void PGetDestino(String TextBusqueda, String Accion) {
+
+        try {
+
+       TblDestino.setModel(NDestinoBloq.NGetDestinoBloq(DefaultValue.Number(TextBusqueda), DefaultValue.Text(TextBusqueda),DefaultValue.Text(TextBusqueda), Accion));
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "ERROR", "ERROR", JOptionPane.ERROR_MESSAGE);
+            System.out.println(e);
+        }
+    }
+         
+         
+         
+         
+         public void BusquedaIdDestino() {
+
+        try {
+           PGetDestino(DefaultValue.Text(TxtIdDestino.getText()), "IDDE");
+
+            TxtIdDestino.setText(TblDestino.getValueAt(0, 0).toString());
+            TxtDestino.setText(TblDestino.getValueAt(0, 1).toString());
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(rootPane, "NO HAY REGISTRO", "MENSAJE", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+
+
  
+         
+       
+       
+        // </editor-fold>  
  
  // <editor-fold defaultstate="collapsed" desc="DescProd">     
  
@@ -2227,7 +2257,7 @@ TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
         VtnProveClien.setSize(588, 602);
         VtnProveClien.setLocationRelativeTo(this);
         VtnProveClien.setAlwaysOnTop(true);
-        PGetProveClien(TxtBusquedaProveClien.getText(), "T");        // TODO add your handling code here:
+        PGetProveClien(TxtBusquedaProveClien.getText(), "TODO");        // TODO add your handling code here:
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void TxtRazonSocialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtRazonSocialActionPerformed
@@ -2248,7 +2278,7 @@ TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
         VtnDestino.setSize(527, 507);
         VtnDestino.setLocationRelativeTo(this);
         VtnDestino.setAlwaysOnTop(true);
-        PGetDestino(TxtBusquedaDestino.getText(), "T");
+        PGetDestino(TxtBusquedaDestino.getText(), "TODO");
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void TxtDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDestinoActionPerformed
