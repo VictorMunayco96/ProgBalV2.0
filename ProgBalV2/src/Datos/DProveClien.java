@@ -16,35 +16,36 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author gates
  */
-public class DDescProd {
+public class DProveClien {
+ 
     
-    int IdDescProd;
-    String DescProd;
+    int IdProveClien;
+    String RazonSocial;
     String Opcion;
 
-    public DDescProd() {
+    public DProveClien() {
     }
 
-    public DDescProd(int IdDescProd, String DescProd, String Opcion) {
-        this.IdDescProd = IdDescProd;
-        this.DescProd = DescProd;
+    public DProveClien(int IdProveClien, String RazonSocial, String Opcion) {
+        this.IdProveClien = IdProveClien;
+        this.RazonSocial = RazonSocial;
         this.Opcion = Opcion;
     }
 
-    public int getIdDescProd() {
-        return IdDescProd;
+    public int getIdProveClien() {
+        return IdProveClien;
     }
 
-    public void setIdDescProd(int IdDescProd) {
-        this.IdDescProd = IdDescProd;
+    public void setIdProveClien(int IdProveClien) {
+        this.IdProveClien = IdProveClien;
     }
 
-    public String getDescProd() {
-        return DescProd;
+    public String getRazonSocial() {
+        return RazonSocial;
     }
 
-    public void setDescProd(String DescProd) {
-        this.DescProd = DescProd;
+    public void setRazonSocial(String RazonSocial) {
+        this.RazonSocial = RazonSocial;
     }
 
     public String getOpcion() {
@@ -55,30 +56,31 @@ public class DDescProd {
         this.Opcion = Opcion;
     }
     
+    
+    
+    
      
-    
-    
-    
-    public DefaultTableModel DGetDescProd(DDescProd Campo) {
+    public DefaultTableModel DGetProveClien(DProveClien Campo) {
         Conexion Cn = new Conexion();
         Connection Con = Cn.Conexion();
        DefaultTableModel modelo = null ;
-String[] titulos = {"ID","Producto"};
-        String[] registro = new String[2];
+String[] titulos = {"ID","PROVEEDOR/CLIENTE","RUC"};
+        String[] registro = new String[3];
 
         modelo = new DefaultTableModel(null, titulos);
 
         try {
 
-            CallableStatement Proc = Con.prepareCall(" CALL PAGetDescProd(?,?,?)");
-Proc.setInt(1, Campo.getIdDescProd());
-Proc.setString(2, Campo.getDescProd());
+            CallableStatement Proc = Con.prepareCall(" CALL PAGetProveClien(?,?,?)");
+Proc.setInt(1, Campo.getIdProveClien());
+Proc.setString(2, Campo.getRazonSocial());
 Proc.setString(3, Campo.getOpcion());
 Proc.execute();
             ResultSet rs = Proc.executeQuery();
             while (rs.next()) {
 registro[0] = rs.getString(1);
 registro[1] = rs.getString(2);
+registro[2] = rs.getString(3);
 modelo.addRow(registro);
             }
             return modelo;
@@ -89,6 +91,7 @@ modelo.addRow(registro);
 
         }
 }
+    
     
     
     

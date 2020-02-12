@@ -6,6 +6,8 @@
 package Presentacion;
 
 import Datos.Conexion;
+import Library.DefaultValue;
+import Negocios.NDescProd;
 //import Library.DefaultValue;
 //import Negocios.NConductorVehiculo;
 //import Negocios.NDestino;
@@ -140,9 +142,9 @@ public class PPeso extends javax.swing.JFrame {
     
     
 //    NConductorVehiculo NConductorVehiculo = new NConductorVehiculo();
-//    NProducto NProducto = new NProducto();
+
 //    NDestino NDestino = new NDestino();
-//    NProveClien NProveClien = new NProveClien();
+  NProveClien NProveClien = new NProveClien();
     
 Conexion Cn = new Conexion();
     Connection Con = Cn.Conexion();
@@ -224,20 +226,7 @@ Conexion Cn = new Conexion();
 
     }
 
-    public void BusquedaIdProducto() {
-
-        try {
-//            PGetProducto(DefaultValue.Text(TxtIdProducto.getText()), "I");
-
-            TxtIdProducto.setText(TblProducto.getValueAt(0, 0).toString());
-            TxtProducto.setText(TblProducto.getValueAt(0, 2).toString());
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(rootPane, "NO HAY REGISTRO", "MENSAJE", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
+  
 
     public void BusquedaIdProveClien() {
 
@@ -286,7 +275,7 @@ Conexion Cn = new Conexion();
 
         try {
 
-            TblDestino.setModel(NDestino.NGetDestino(DefaultValue.Number(TextBusqueda), DefaultValue.Text(TextBusqueda), Accion));
+//            TblDestino.setModel(NDestino.NGetDestino(DefaultValue.Number(TextBusqueda), DefaultValue.Text(TextBusqueda), Accion));
 
         } catch (Exception e) {
 
@@ -303,14 +292,32 @@ Nom.getColumnModel().getColumn(Num).setMinWidth(0);
 Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
     
     }
-    public void PGetProducto(String TextBusqueda, String Accion) {
+ 
+ 
+  // <editor-fold defaultstate="collapsed" desc="ProveCliente"> 
+ 
+ 
+ 
+ 
+ 
+ // </editor-fold>  
+ 
+ 
+ 
+ 
+ 
+ // <editor-fold defaultstate="collapsed" desc="DescProd">     
+ 
+ NDescProd NDescProd = new NDescProd();
+ 
+ 
+    public void PGetDescProd(String TextBusqueda, String Accion) {
 
         try {
 
-            TblProducto.setModel(NProducto.NGetProducto(DefaultValue.Number(TextBusqueda), DefaultValue.Text(TextBusqueda), DefaultValue.Text(TextBusqueda), DefaultValue.Text(TextBusqueda), Accion));
-            ColumHide(1, TblProducto);
-            ColumHide(3, TblProducto);
-            ColumHide(4, TblProducto);
+            TblProducto.setModel(NDescProd.NGetDescProd(DefaultValue.Number(TextBusqueda), DefaultValue.Text(TextBusqueda), Accion));
+            ColumHide(0, TblProducto);
+    
         } catch (Exception e) {
 
             JOptionPane.showMessageDialog(null, "ERROR", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -318,11 +325,34 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
         }
     }
 
+
+       public void BusquedaIdProducto() {
+
+        try {
+           PGetDescProd(DefaultValue.Text(TxtIdProducto.getText()), "IDDE");
+
+            TxtIdProducto.setText(TblProducto.getValueAt(0, 0).toString());
+            TxtProducto.setText(TblProducto.getValueAt(0, 1).toString());
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(rootPane, "NO HAY REGISTRO", "MENSAJE", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+
+
+// </editor-fold>   
+    
+   
+    
+
     public void PGetConductorVehiculo(String TextBusqueda, String Accion) {
 
         try {
 
-            TblConductorVehiculo.setModel(NConductorVehiculo.NGetConductorVehiculo(DefaultValue.Text(TextBusqueda), DefaultValue.Number(TextBusqueda), DefaultValue.Text(TextBusqueda), Accion));
+//            TblConductorVehiculo.setModel(NConductorVehiculo.NGetConductorVehiculo(DefaultValue.Text(TextBusqueda), DefaultValue.Number(TextBusqueda), DefaultValue.Text(TextBusqueda), Accion));
 
         } catch (Exception e) {
 
@@ -333,7 +363,7 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
 
     ///////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////SETS AND GETS///////////////////////////////////////////////////
-    NPeso NPeso = new NPeso();
+  //  NPeso NPeso = new NPeso();
     String Accion = "I";
 
     public void PNew() {
@@ -371,7 +401,7 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
 
         try {
 
-            TblPeso.setModel(NPeso.NGetPeso(DefaultValue.Number(TextBusqueda), DefaultValue.Long(TextBusqueda), DefaultValue.Text(TextBusqueda), DefaultValue.Text(TextBusqueda), DefaultValue.Text(TextBusqueda), DefaultValue.Text(TextBusqueda), Accion,"2012-12-12 10:10:10","2012-12-12 10:10:10"));
+//            TblPeso.setModel(NPeso.NGetPeso(DefaultValue.Number(TextBusqueda), DefaultValue.Long(TextBusqueda), DefaultValue.Text(TextBusqueda), DefaultValue.Text(TextBusqueda), DefaultValue.Text(TextBusqueda), DefaultValue.Text(TextBusqueda), Accion,"2012-12-12 10:10:10","2012-12-12 10:10:10"));
 
         } catch (Exception e) {
 
@@ -379,58 +409,58 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
             System.out.println(e);
         }
     }
-
-    public void Imprimir() {
-    
-        if (Integer.parseInt(TxtPesoCE.getText())>Integer.parseInt(TxtPesoCS.getText())) {
-            Map p = new HashMap();
-           
-            
-             p.put("IDPESOS", Integer.parseInt(TxtIdPeso.getText()));
-            JasperReport report;
-            JasperPrint print;
-
-            try {
-                report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                        + "/src/Reportes/TicketBalanzaP.jrxml");
-
-                print = JasperFillManager.fillReport(report, p, Con);
-                JasperPrintManager.printReport(print, false);
-                
-                
-//                JasperViewer view = new JasperViewer(print, true);
-//                view.setTitle("Ticket Balanza");
-//                view.setVisible(false);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }else{
-            Map p = new HashMap();
-           
-            
-             p.put("IDPESOS", Integer.parseInt(TxtIdPeso.getText()));
-            JasperReport report;
-            JasperPrint print;
-
-            try {
-                report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                        + "/src/Reportes/TicketBalanzaC.jrxml");
-
-                print = JasperFillManager.fillReport(report, p, Con);
-                JasperPrintManager.printReport(print, false);
-                
-                
-//                JasperViewer view = new JasperViewer(print, true);
-//                view.setTitle("Ticket Balanza");
-//                view.setVisible(false);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-           
-       
-
-    }
+//
+//    public void Imprimir() {
+//    
+//        if (Integer.parseInt(TxtPesoCE.getText())>Integer.parseInt(TxtPesoCS.getText())) {
+//            Map p = new HashMap();
+//           
+//            
+//             p.put("IDPESOS", Integer.parseInt(TxtIdPeso.getText()));
+//            JasperReport report;
+//            JasperPrint print;
+//
+//            try {
+//                report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+//                        + "/src/Reportes/TicketBalanzaP.jrxml");
+//
+//                print = JasperFillManager.fillReport(report, p, Con);
+//                JasperPrintManager.printReport(print, false);
+//                
+//                
+////                JasperViewer view = new JasperViewer(print, true);
+////                view.setTitle("Ticket Balanza");
+////                view.setVisible(false);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }else{
+//            Map p = new HashMap();
+//           
+//            
+//             p.put("IDPESOS", Integer.parseInt(TxtIdPeso.getText()));
+//            JasperReport report;
+//            JasperPrint print;
+//
+//            try {
+//                report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+//                        + "/src/Reportes/TicketBalanzaC.jrxml");
+//
+//                print = JasperFillManager.fillReport(report, p, Con);
+//                JasperPrintManager.printReport(print, false);
+//                
+//                
+////                JasperViewer view = new JasperViewer(print, true);
+////                view.setTitle("Ticket Balanza");
+////                view.setVisible(false);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//           
+//       
+//
+//    }
 
     public void PSetPeso() {
 
@@ -471,22 +501,22 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
 
             try {
                 //MODIFICAR
-                NPeso.NSetPeso(DefaultValue.Number(TxtIdPeso.getText()),
-                        TipoMovimiento,
-                        DefaultValue.Long(TxtNumGuia.getText()),
-                        DefaultValue.Text(TxtFechaHoraSal.getText()),
-                        DefaultValue.Text(TxtFechaHoraEnt.getText()),
-                        DefaultValue.Number(TxtPesoCE.getText()),
-                        DefaultValue.Number(TxtPesoCS.getText()),
-                        DefaultValue.Number(TxtNetoC.getText()),
-                        DefaultValue.Text(TxtObservE.getText()),
-                        DefaultValue.Text(TxtObservS.getText()),
-//                        Estado, Integer.parseInt(PMenu.LblIdUsuario.getText()),
-                        DefaultValue.Number(TxtIdProveClien.getText()),
-                        DefaultValue.NumberUno(TxtIdDestino.getText()),
-                        DefaultValue.NumberUno(TxtIdProducto.getText()),
-                        DefaultValue.Number(TxtIdConductorVehiculo.getText()),
-                        Accion);
+//                NPeso.NSetPeso(DefaultValue.Number(TxtIdPeso.getText()),
+//                        TipoMovimiento,
+//                        DefaultValue.Long(TxtNumGuia.getText()),
+//                        DefaultValue.Text(TxtFechaHoraSal.getText()),
+//                        DefaultValue.Text(TxtFechaHoraEnt.getText()),
+//                        DefaultValue.Number(TxtPesoCE.getText()),
+//                        DefaultValue.Number(TxtPesoCS.getText()),
+//                        DefaultValue.Number(TxtNetoC.getText()),
+//                        DefaultValue.Text(TxtObservE.getText()),
+//                        DefaultValue.Text(TxtObservS.getText()),
+////                        Estado, Integer.parseInt(PMenu.LblIdUsuario.getText()),
+//                        DefaultValue.Number(TxtIdProveClien.getText()),
+//                        DefaultValue.NumberUno(TxtIdDestino.getText()),
+//                        DefaultValue.NumberUno(TxtIdProducto.getText()),
+//                        DefaultValue.Number(TxtIdConductorVehiculo.getText()),
+//                        Accion);
                 //PGetPeso(TxtBusqueda.getText(), "T");
 
                 JOptionPane.showMessageDialog(null, "REGISTRO EDITADO");
@@ -504,7 +534,7 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
 
                     int fila = TblPeso.getSelectedRow();
 
-                    NPeso.NSetPeso(DefaultValue.Number(TxtIdPeso.getText()), "", DefaultValue.Long(TxtNumGuia.getText()), ValidateDate(TxtFechaHoraSal.getText()), DefaultValue.Text(TxtFechaHoraEnt.getText()), DefaultValue.Number(TxtPesoCE.getText()), DefaultValue.Number(TxtPesoCS.getText()), DefaultValue.Number(TxtNetoC.getText()), DefaultValue.Text(TxtObservE.getText()), DefaultValue.Text(TxtObservS.getText()), "", 0, DefaultValue.Number(TxtIdProveClien.getText()), DefaultValue.Number(TxtIdDestino.getText()), DefaultValue.Number(TxtIdProducto.getText()), DefaultValue.Number(TxtIdConductorVehiculo.getText()), Accion);
+//                    NPeso.NSetPeso(DefaultValue.Number(TxtIdPeso.getText()), "", DefaultValue.Long(TxtNumGuia.getText()), ValidateDate(TxtFechaHoraSal.getText()), DefaultValue.Text(TxtFechaHoraEnt.getText()), DefaultValue.Number(TxtPesoCE.getText()), DefaultValue.Number(TxtPesoCS.getText()), DefaultValue.Number(TxtNetoC.getText()), DefaultValue.Text(TxtObservE.getText()), DefaultValue.Text(TxtObservS.getText()), "", 0, DefaultValue.Number(TxtIdProveClien.getText()), DefaultValue.Number(TxtIdDestino.getText()), DefaultValue.Number(TxtIdProducto.getText()), DefaultValue.Number(TxtIdConductorVehiculo.getText()), Accion);
                     //  PGetPeso(TxtBusqueda.getText(), "T");
                     JOptionPane.showMessageDialog(null, "REGISTRO ELIMINADO");
                     PNew();
@@ -517,22 +547,22 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
 
             try {
                 //DESTARAR
-                NPeso.NSetPeso(DefaultValue.Number(TxtIdPeso.getText()),
-                        TipoMovimiento,
-                        DefaultValue.Long(TxtNumGuia.getText()),
-                        DefaultValue.Text(TxtFechaHoraSal.getText()),
-                        DefaultValue.Text(TxtFechaHoraEnt.getText()),
-                        DefaultValue.Number(TxtPesoCE.getText()),
-                        DefaultValue.Number(TxtPesoCS.getText()),
-                        DefaultValue.Number(TxtNetoC.getText()),
-                        DefaultValue.Text(TxtObservE.getText()),
-                        DefaultValue.Text(TxtObservS.getText()),
-//                        Estado, Integer.parseInt(PMenu.LblIdUsuario.getText()),
-                        DefaultValue.Number(TxtIdProveClien.getText()),
-                        DefaultValue.NumberUno(TxtIdDestino.getText()),
-                        DefaultValue.NumberUno(TxtIdProducto.getText()),
-                        DefaultValue.Number(TxtIdConductorVehiculo.getText()),
-                        "U");
+//                NPeso.NSetPeso(DefaultValue.Number(TxtIdPeso.getText()),
+//                        TipoMovimiento,
+//                        DefaultValue.Long(TxtNumGuia.getText()),
+//                        DefaultValue.Text(TxtFechaHoraSal.getText()),
+//                        DefaultValue.Text(TxtFechaHoraEnt.getText()),
+//                        DefaultValue.Number(TxtPesoCE.getText()),
+//                        DefaultValue.Number(TxtPesoCS.getText()),
+//                        DefaultValue.Number(TxtNetoC.getText()),
+//                        DefaultValue.Text(TxtObservE.getText()),
+//                        DefaultValue.Text(TxtObservS.getText()),
+////                        Estado, Integer.parseInt(PMenu.LblIdUsuario.getText()),
+//                        DefaultValue.Number(TxtIdProveClien.getText()),
+//                        DefaultValue.NumberUno(TxtIdDestino.getText()),
+//                        DefaultValue.NumberUno(TxtIdProducto.getText()),
+//                        DefaultValue.Number(TxtIdConductorVehiculo.getText()),
+//                        "U");
                 PGetPeso("", "T");
 
                 try {
@@ -542,7 +572,7 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
 
                    
 
-                   Imprimir();
+//                   Imprimir();
                     PNew();
                 }
                 
@@ -767,7 +797,7 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
         jScrollPane3.setViewportView(TblProducto);
 
         CboBusquedaProducto.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
-        CboBusquedaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PRODUCTO", "DESCRIPCION", "ID PRODUCTO", "CATEGORIA" }));
+        CboBusquedaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DESCRIPCION" }));
 
         jButton16.setBackground(new java.awt.Color(0, 153, 0));
         jButton16.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
@@ -2026,17 +2056,17 @@ TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
     }
     private void TxtBusquedaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtBusquedaProductoActionPerformed
         if (TxtBusquedaProducto.getText().isEmpty()) {
-            PGetProducto(TxtBusquedaProducto.getText(), "T");
+            PGetDescProd(TxtBusquedaProducto.getText(), "TODO");
         } else {
-            PGetProducto(TxtBusquedaProducto.getText(), CboBusquedaProducto.getSelectedItem().toString().substring(0, 1));
+            PGetDescProd(TxtBusquedaProducto.getText(), CboBusquedaProducto.getSelectedItem().toString().substring(0, 4));
         }        // TODO add your handling code here:
     }//GEN-LAST:event_TxtBusquedaProductoActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         if (TxtBusquedaProducto.getText().isEmpty()) {
-            PGetProducto(TxtBusquedaProducto.getText(), "T");
+            PGetDescProd(TxtBusquedaProducto.getText(), "TODO");
         } else {
-            PGetProducto(TxtBusquedaProducto.getText(), CboBusquedaProducto.getSelectedItem().toString().substring(0, 1));
+            PGetDescProd(TxtBusquedaProducto.getText(), CboBusquedaProducto.getSelectedItem().toString().substring(0, 4));
         }
     }//GEN-LAST:event_jButton15ActionPerformed
 
@@ -2047,7 +2077,7 @@ TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
                 int fila = TblProducto.getSelectedRow();
 
                 TxtIdProducto.setText(TblProducto.getValueAt(fila, 0).toString());
-                TxtProducto.setText(TblProducto.getValueAt(fila, 2).toString());
+                TxtProducto.setText(TblProducto.getValueAt(fila, 1).toString());
 
                 VtnProducto.dispose();
 
@@ -2059,7 +2089,7 @@ TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
     }//GEN-LAST:event_TblProductoMousePressed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        this.dispose();        // TODO add your handling code here:
+        VtnProducto.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void TxtBusquedaDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtBusquedaDestinoActionPerformed
@@ -2189,7 +2219,7 @@ TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void BtnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminar1ActionPerformed
-        Imprimir();        // TODO add your handling code here:
+//        Imprimir();        // TODO add your handling code here:
     }//GEN-LAST:event_BtnEliminar1ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
@@ -2231,10 +2261,10 @@ TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         VtnProducto.setVisible(true);
-        VtnProducto.setSize(588, 602);
+        VtnProducto.setSize(588, 617);
         VtnProducto.setLocationRelativeTo(this);
         VtnProducto.setAlwaysOnTop(true);
-        PGetProducto(TxtBusquedaProducto.getText(), "T");
+        PGetDescProd(TxtBusquedaProducto.getText(), "TODO");
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed

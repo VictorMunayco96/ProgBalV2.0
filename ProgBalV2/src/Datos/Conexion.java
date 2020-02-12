@@ -62,7 +62,7 @@ public class Conexion {
     
       public Connection Conexion() 
              {
-                 leerTexto("C:\\SOFT\\conexion2.txt");
+                 leerTexto("/home/gates/Documentos/Conexion");
           Connection cn = null;
           
                  try {

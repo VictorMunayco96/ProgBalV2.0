@@ -6,6 +6,7 @@
 package progbalv2;
 
 import Presentacion.PDespacho;
+import Presentacion.PPeso;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,7 +19,7 @@ public class ProgBalV2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      PDespacho Obj = new PDespacho();
+      PPeso Obj = new PPeso();
       Obj.setVisible(true);
     }
     
