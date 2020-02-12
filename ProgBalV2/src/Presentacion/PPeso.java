@@ -7,6 +7,7 @@ package Presentacion;
 
 import Datos.Conexion;
 import Library.DefaultValue;
+import Negocios.NConductorVehiculo;
 import Negocios.NDescProd;
 import Negocios.NDestinoBloq;
 import Negocios.NProveClien;
@@ -142,8 +143,7 @@ public class PPeso extends javax.swing.JFrame {
     
     
     
-    
-//    NConductorVehiculo NConductorVehiculo = new NConductorVehiculo();
+       
   
 
     
@@ -212,20 +212,7 @@ Conexion Cn = new Conexion();
 
     }
 
-    public void BusquedaPlaca() {
-
-        try {
-//            PGetConductorVehiculo(DefaultValue.Text(TxtPlaca.getText()), "P");
-
-            TxtChofer.setText(TblConductorVehiculo.getValueAt(0, 3).toString());
-            TxtIdConductorVehiculo.setText(TblConductorVehiculo.getValueAt(0, 0).toString());
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(rootPane, "NO HAY REGISTRO", "MENSAJE", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
+ 
 
   
 
@@ -245,6 +232,28 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
     }
  
  
+ 
+  // <editor-fold defaultstate="collapsed" desc="PLACA"> 
+ 
+    NConductorVehiculo NConductorVehiculo = new NConductorVehiculo();
+    
+    public void BusquedaPlaca() {
+
+        try {
+     PGetConductorVehiculo(DefaultValue.Text(TxtPlaca.getText()), "PLAC");
+
+            TxtChofer.setText(TblConductorVehiculo.getValueAt(0, 3).toString());
+            TxtIdConductorVehiculo.setText(TblConductorVehiculo.getValueAt(0, 0).toString());
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(rootPane, "NO HAY REGISTRO", "MENSAJE", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+ 
+ 
+ // </editor-fold> 
  
  
  
