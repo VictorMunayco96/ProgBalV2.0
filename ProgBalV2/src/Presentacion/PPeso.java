@@ -965,7 +965,7 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
         jScrollPane5.setViewportView(TblDestino);
 
         CboBusquedaDestino.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
-        CboBusquedaDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DESTINO", "ID DESTINO" }));
+        CboBusquedaDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DESTINO", "IDDESTINO" }));
 
         jButton18.setBackground(new java.awt.Color(0, 153, 0));
         jButton18.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
@@ -2088,7 +2088,12 @@ TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
         TxtProducto.setText(TblPeso.getValueAt(0, 21).toString());
         Accion = "DES";
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(rootPane, "NO HAY VEHICULO PARA DESTARAR CON ESTA PLACA","MENSAJE",JOptionPane.ERROR_MESSAGE);
+            
+            
+            
+             
+            
+            JOptionPane.showMessageDialog(rootPane,e+ "NO HAY VEHICULO PARA DESTARAR CON ESTA PLACA","MENSAJE",JOptionPane.ERROR_MESSAGE);
         }
   
 
@@ -2133,17 +2138,17 @@ TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
 
     private void TxtBusquedaDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtBusquedaDestinoActionPerformed
         if (TxtBusquedaDestino.getText().isEmpty()) {
-            PGetDestino(TxtBusquedaDestino.getText(), "T");
+            PGetDestino(TxtBusquedaDestino.getText(), "TODO");
         } else {
-            PGetDestino(TxtBusquedaDestino.getText(), CboBusquedaDestino.getSelectedItem().toString().substring(0, 2));
+            PGetDestino(TxtBusquedaDestino.getText(), CboBusquedaDestino.getSelectedItem().toString().substring(0, 4));
         }
     }//GEN-LAST:event_TxtBusquedaDestinoActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         if (TxtBusquedaDestino.getText().isEmpty()) {
-            PGetDestino(TxtBusquedaDestino.getText(), "T");
+            PGetDestino(TxtBusquedaDestino.getText(), "TODO");
         } else {
-            PGetDestino(TxtBusquedaDestino.getText(), CboBusquedaDestino.getSelectedItem().toString().substring(0, 2));
+            PGetDestino(TxtBusquedaDestino.getText(), CboBusquedaDestino.getSelectedItem().toString().substring(0, 4));
         }
     }//GEN-LAST:event_jButton17ActionPerformed
 
@@ -2376,7 +2381,7 @@ TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
         try {
             Destarar();
         } catch (Exception e) {
-            PGetConductorVehiculo(DefaultValue.Text(TxtPlaca.getText()), "P");
+            PGetConductorVehiculo(DefaultValue.Text(TxtPlaca.getText()), "PLAC");
 
             TxtChofer.setText(TblConductorVehiculo.getValueAt(0, 3).toString());
             TxtIdConductorVehiculo.setText(TblConductorVehiculo.getValueAt(0, 0).toString());

@@ -106,13 +106,14 @@ BEGIN
    $$ 
    
    
-   
+
+  
       DELIMITER $$
 
  CREATE PROCEDURE PAGetDestinoBloq(
 
 in _IdDestinoBloq int,
-in _DestinoBloq varchar(45),
+in _DestinoDes varchar(45),
 in _CodDestinoBloq varchar(15),
 in _Opcion varchar(4)
 
@@ -126,7 +127,7 @@ BEGIN
     inner join DestinoBloq DB 
     on DD.IdDestinoDesc=DB.IdDestinoDesc) 
     on D.IdDestino=DD.IdDestino 
-    order by IdDestinoBloq desc;
+    order by DB.IdDestinoBloq desc;
      
      
      End IF;
@@ -136,7 +137,18 @@ BEGIN
   select DB.IdDestinoBloq, DB.DestinoBloq, DD.DestinoDes, D.Destino from Destino D 
     inner join (DestinoDesc DD inner join DestinoBloq DB on DD.IdDestinoDesc=DB.IdDestinoDesc)
     on D.IdDestino=DD.IdDestino 
-    where D.DestinoBloq like concat('%',_DestinoBloq,'%')
+    where DD.DestinoDes like concat('%',_DestinoDes,'%')
+    order by DB.IdDestinoBloq desc;
+     
+     
+     End IF;
+     
+      if _Opcion='IDDE' then 
+     
+  select DB.IdDestinoBloq, DB.DestinoBloq, DD.DestinoDes, D.Destino from Destino D 
+    inner join (DestinoDesc DD inner join DestinoBloq DB on DD.IdDestinoDesc=DB.IdDestinoDesc)
+    on D.IdDestino=DD.IdDestino 
+    where DB.IdDestinoBloq=_IdDestinoBloq 
     order by DB.IdDestinoBloq desc;
      
      

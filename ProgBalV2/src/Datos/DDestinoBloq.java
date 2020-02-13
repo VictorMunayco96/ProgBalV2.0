@@ -74,7 +74,7 @@ public class DDestinoBloq {
         Conexion Cn = new Conexion();
         Connection Con = Cn.Conexion();
        DefaultTableModel modelo = null ;
-String[] titulos = {"ID","PROVEEDOR/CLIENTE","RUC"};
+String[] titulos = {"ID","DESTINO"};
         String[] registro = new String[3];
 
         modelo = new DefaultTableModel(null, titulos);
