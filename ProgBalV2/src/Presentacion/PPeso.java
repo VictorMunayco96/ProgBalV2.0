@@ -10,6 +10,7 @@ import Library.DefaultValue;
 import Negocios.NConductorVehiculo;
 import Negocios.NDescProd;
 import Negocios.NDestinoBloq;
+import Negocios.NPeso;
 import Negocios.NProveClien;
 //import Library.DefaultValue;
 //import Negocios.NConductorVehiculo;
@@ -52,7 +53,7 @@ public class PPeso extends javax.swing.JFrame {
      */
     public PPeso() {
         initComponents();
-        TxtIdConductorVehiculo.setVisible(false);
+        TxtIdConductorVehiculo.setVisible(true);
 //Arrancar();
         
         
@@ -231,6 +232,26 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
     
     }
  
+ // <editor-fold defaultstate="collapsed" desc="PESO"> 
+ NPeso NPeso = new NPeso();
+ 
+ public void PGetPeso(String TextBusqueda, String Accion) {
+
+        try {
+
+        TblPeso.setModel(NPeso.NGetPeso(DefaultValue.Number(TextBusqueda), DefaultValue.Text(TextBusqueda), Accion));
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "ERROR" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            System.out.println(e);
+        }
+    }
+ 
+ 
+ 
+  // </editor-fold>  
+ 
  
  
   // <editor-fold defaultstate="collapsed" desc="PLACA"> 
@@ -250,6 +271,20 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
             JOptionPane.showMessageDialog(rootPane, "NO HAY REGISTRO", "MENSAJE", JOptionPane.ERROR_MESSAGE);
         }
 
+    }
+    
+    
+        public void PGetConductorVehiculo(String TextBusqueda, String Accion) {
+
+        try {
+
+        TblConductorVehiculo.setModel(NConductorVehiculo.NGetConductorVehiculo(DefaultValue.Text(TextBusqueda),  Accion));
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "ERROR", "ERROR", JOptionPane.ERROR_MESSAGE);
+            System.out.println(e);
+        }
     }
  
  
@@ -387,22 +422,11 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
    
     
 
-    public void PGetConductorVehiculo(String TextBusqueda, String Accion) {
 
-        try {
-
-//            TblConductorVehiculo.setModel(NConductorVehiculo.NGetConductorVehiculo(DefaultValue.Text(TextBusqueda), DefaultValue.Number(TextBusqueda), DefaultValue.Text(TextBusqueda), Accion));
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null, "ERROR", "ERROR", JOptionPane.ERROR_MESSAGE);
-            System.out.println(e);
-        }
-    }
 
     ///////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////SETS AND GETS///////////////////////////////////////////////////
-  //  NPeso NPeso = new NPeso();
+   
     String Accion = "I";
 
     public void PNew() {
@@ -436,18 +460,7 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
 
     }
 
-    public void PGetPeso(String TextBusqueda, String Accion) {
-
-        try {
-
-//            TblPeso.setModel(NPeso.NGetPeso(DefaultValue.Number(TextBusqueda), DefaultValue.Long(TextBusqueda), DefaultValue.Text(TextBusqueda), DefaultValue.Text(TextBusqueda), DefaultValue.Text(TextBusqueda), DefaultValue.Text(TextBusqueda), Accion,"2012-12-12 10:10:10","2012-12-12 10:10:10"));
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null, "ERROR" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
-            System.out.println(e);
-        }
-    }
+    
 //
 //    public void Imprimir() {
 //    
@@ -522,10 +535,27 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
             if (!TxtPlaca.getText().isEmpty() && !TxtPesoCE.getText().isEmpty()) {
                 try {
 
-//                    NPeso.NSetPeso(DefaultValue.Number(TxtIdPeso.getText()),
-//                            TipoMovimiento, DefaultValue.Long(TxtNumGuia.getText()),
-//                            "2000-12-12 00:00:00",
-//                            DefaultValue.Text(TxtFechaHoraEnt.getText()), DefaultValue.Number(TxtPesoCE.getText()), DefaultValue.Number(TxtPesoCS.getText()), DefaultValue.Number(TxtNetoC.getText()), DefaultValue.Text(TxtObservE.getText()), DefaultValue.Text(TxtObservS.getText()), Estado, Integer.parseInt(PMenu.LblIdUsuario.getText()), DefaultValue.Number(TxtIdProveClien.getText()), DefaultValue.NumberUno(TxtIdDestino.getText()), DefaultValue.NumberUno(TxtIdProducto.getText()), DefaultValue.Number(TxtIdConductorVehiculo.getText()), Accion);
+                  NPeso.NSetPeso(DefaultValue.Number(TxtIdPeso.getText()),
+                           TipoMovimiento, 
+                           DefaultValue.Long(TxtNumGuia.getText()),
+                          "2000-12-12 00:00:00",
+                        DefaultValue.Text(TxtFechaHoraEnt.getText()), 
+                        DefaultValue.Number(TxtPesoCE.getText()), 
+                        DefaultValue.Number(TxtPesoCS.getText()), 
+                        DefaultValue.Number(TxtNetoC.getText()), 
+                        DefaultValue.Text(TxtObservE.getText()), 
+                        DefaultValue.Text(TxtObservS.getText()), 
+                        Estado, 
+                       
+                        //Integer.parseInt(PMenu.LblIdUsuario.getText()),               CAMBIAR ESTE CAMPO CUANDO ESTE LA VENTANA PRINCIPAL
+                        Integer.parseInt("70605597"),
+                        DefaultValue.Number(TxtIdProveClien.getText()),
+                        123456,//CAMBIAR CODIGO PRECINTO
+                        DefaultValue.Number(TxtIdConductorVehiculo.getText()),
+                        DefaultValue.NumberUno(TxtIdDestino.getText()), 
+                        DefaultValue.NumberUno(TxtIdProducto.getText()), 
+                         
+                        Accion);
 
                     // PGetPeso(TxtBusqueda.getText(), "T");
                     JOptionPane.showMessageDialog(null, "REGISTRO GUARDADO");
@@ -586,23 +616,35 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
 
             try {
                 //DESTARAR
-//                NPeso.NSetPeso(DefaultValue.Number(TxtIdPeso.getText()),
-//                        TipoMovimiento,
-//                        DefaultValue.Long(TxtNumGuia.getText()),
-//                        DefaultValue.Text(TxtFechaHoraSal.getText()),
-//                        DefaultValue.Text(TxtFechaHoraEnt.getText()),
-//                        DefaultValue.Number(TxtPesoCE.getText()),
-//                        DefaultValue.Number(TxtPesoCS.getText()),
-//                        DefaultValue.Number(TxtNetoC.getText()),
-//                        DefaultValue.Text(TxtObservE.getText()),
-//                        DefaultValue.Text(TxtObservS.getText()),
-////                        Estado, Integer.parseInt(PMenu.LblIdUsuario.getText()),
-//                        DefaultValue.Number(TxtIdProveClien.getText()),
-//                        DefaultValue.NumberUno(TxtIdDestino.getText()),
-//                        DefaultValue.NumberUno(TxtIdProducto.getText()),
-//                        DefaultValue.Number(TxtIdConductorVehiculo.getText()),
-//                        "U");
-                PGetPeso("", "T");
+                
+                
+                         
+                
+                
+                
+                
+                NPeso.NSetPeso(DefaultValue.Number(TxtIdPeso.getText()),
+                        TipoMovimiento,
+                        DefaultValue.Long(TxtNumGuia.getText()),
+                        DefaultValue.Text(TxtFechaHoraSal.getText()),
+                        DefaultValue.Text(TxtFechaHoraEnt.getText()),
+                        DefaultValue.Number(TxtPesoCE.getText()),
+                        DefaultValue.Number(TxtPesoCS.getText()),
+                        DefaultValue.Number(TxtNetoC.getText()),
+                        DefaultValue.Text(TxtObservE.getText()),
+                        DefaultValue.Text(TxtObservS.getText()),
+ Estado, 
+                       
+                        //Integer.parseInt(PMenu.LblIdUsuario.getText()),               CAMBIAR ESTE CAMPO CUANDO ESTE LA VENTANA PRINCIPAL
+                        Integer.parseInt("70605597"),
+                        DefaultValue.Number(TxtIdProveClien.getText()),
+                        123456,//CAMBIAR CODIGO PRECINTO
+                         DefaultValue.Number(TxtIdConductorVehiculo.getText()),
+                        DefaultValue.NumberUno(TxtIdDestino.getText()),
+                        DefaultValue.NumberUno(TxtIdProducto.getText()),
+                       
+                        "U");
+                PGetPeso("", "TODO");
 
                 try {
                 int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿DESEA IMPRIMIR TICKET?", "MENSAJE", 2);
@@ -1700,15 +1742,18 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
                                         .addComponent(TxtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(TxtIdConductorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(BtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(BtnEliminar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(BtnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BtnEliminar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(TxtIdConductorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1771,9 +1816,9 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(7, 7, 7)
-                .addComponent(TxtIdConductorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(TxtIdConductorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -1808,7 +1853,7 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jButton5))
         );
 
@@ -2040,6 +2085,8 @@ String ID=JOptionPane.showInputDialog("Ingresar ID para busqueda:");
     }
     public void Destarar() {
         
+        
+        System.out.println("DESTARAR");
             PGetPeso(DefaultValue.Text(TxtPlaca.getText()), "PLAC");    
        
             
@@ -2065,16 +2112,17 @@ String ID=JOptionPane.showInputDialog("Ingresar ID para busqueda:");
         //TxtDNI.setText(TblPeso.getValueAt(0, 11).toString());
         TxtIdProveClien.setText(TblPeso.getValueAt(0, 12).toString());
         TxtRazonSocial.setText(TblPeso.getValueAt(0, 13).toString());
-        TxtIdConductorVehiculo.setText(TblPeso.getValueAt(0, 14).toString());
-        TxtPlaca.setText(TblPeso.getValueAt(0, 15).toString());
-        TxtChofer.setText(TblPeso.getValueAt(0, 16).toString() + " " + TblPeso.getValueAt(0, 17).toString());
+        int Precinto=Integer.parseInt(TblPeso.getValueAt(0, 14).toString());
+        TxtIdConductorVehiculo.setText(TblPeso.getValueAt(0, 15).toString());
+        TxtPlaca.setText(TblPeso.getValueAt(0, 16).toString());
+        TxtChofer.setText(TblPeso.getValueAt(0, 17).toString());
 
                 if (TblPeso.getValueAt(0, 18).toString().equals("1")) {
                     TxtIdDestino.setText("");
                 }else{
                     TxtIdDestino.setText(TblPeso.getValueAt(0, 18).toString());
                 }
-TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
+        TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
 
         //TxtIdProducto.setText(TblPeso.getValueAt(0, 20).toString());
         
@@ -2380,11 +2428,20 @@ TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
 
         try {
             Destarar();
+            
         } catch (Exception e) {
-            PGetConductorVehiculo(DefaultValue.Text(TxtPlaca.getText()), "PLAC");
+            System.out.println("BUsqueda PLACA");
+            
+            
+            try {
+                PGetConductorVehiculo(DefaultValue.Text(TxtPlaca.getText()), "PLAC");
 
             TxtChofer.setText(TblConductorVehiculo.getValueAt(0, 3).toString());
             TxtIdConductorVehiculo.setText(TblConductorVehiculo.getValueAt(0, 0).toString());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "NO HAY VEHICULO CON ESTA PLACA");
+            }
+            
            
         }
 
