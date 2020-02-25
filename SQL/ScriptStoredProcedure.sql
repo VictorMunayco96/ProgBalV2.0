@@ -1,5 +1,5 @@
 Use DBMolino;
-drop procedure PAGetCoductorVehiculo;
+
 
 DELIMITER $$
  CREATE PROCEDURE PAGetCoductorVehiculo(
@@ -170,7 +170,7 @@ BEGIN
    $$ 
    
    
-   drop procedure PASetPeso;
+
    
 DELIMITER $$
 CREATE PROCEDURE PASetPeso(
@@ -186,7 +186,7 @@ in _NetoC int,
 in _ObservE varchar(100),
 in _ObservS varchar(100),
 in _Estado varchar(45),
-in _DNI int,
+in _IdUsuario int,
 in _IdProveClien int,
 in _Precinto int,
 in _IdConductorVehiculo int,
@@ -197,15 +197,15 @@ in _Opcion varchar(1)
 )
 BEGIN
 if _Opcion='I' then
-  insert into Peso (TipoMovimiento, NumGuia, FechaHoraSal, FechaHoraEnt, PesoCE, PesoCS, NetoC, ObservE, ObservS, Estado,DNI,
+  insert into Peso (TipoMovimiento, NumGuia, FechaHoraSal, FechaHoraEnt, PesoCE, PesoCS, NetoC, ObservE, ObservS, Estado,IdUsuario,
   IdProveClien, Precinto,IdDestinoBloq, IdDescProd, IdConductorVehiculo)
-  values(_TipoMovimiento, _NumGuia, _FechaHoraSal, _FechaHoraEnt, _PesoCE, _PesoCS, _NetoC, _ObservE, _ObservS, _Estado,_DNI,
+  values(_TipoMovimiento, _NumGuia, _FechaHoraSal, _FechaHoraEnt, _PesoCE, _PesoCS, _NetoC, _ObservE, _ObservS, _Estado,_IdUsuario,
   _IdProveClien, _Precinto,_IdDestinoBloq, _IdDescProd, _IdConductorVehiculo);
   End IF;
 
   if _Opcion='U' then
   Update Peso set TipoMovimiento=_TipoMovimiento, NumGuia=_NumGuia, FechaHoraSal=_FechaHoraSal, FechaHoraEnt=_FechaHoraEnt, PesoCE=_PesoCE, PesoCS=_PesoCS, 
- NetoC=_NetoC, ObservE=_ObservE, ObservS=_ObservS, Estado=_Estado,DNI=_DNI, IdProveClien=_IdProveClien, Precinto=_Precinto, IdDestinoBloq=_IdDestinoBloq, IdDescProd=_IdDescProd, IdConductorVehiculo=_IdConductorVehiculo where IdPeso=_IdPeso;
+ NetoC=_NetoC, ObservE=_ObservE, ObservS=_ObservS, Estado=_Estado,IdUsuario=_IdUsuario, IdProveClien=_IdProveClien, Precinto=_Precinto, IdDestinoBloq=_IdDestinoBloq, IdDescProd=_IdDescProd, IdConductorVehiculo=_IdConductorVehiculo where IdPeso=_IdPeso;
 
   End If;
 
@@ -223,9 +223,7 @@ $$
    
    
    
-   use DBMolino;
-   
-   Drop procedure PAGetPeso;
+ 
  
 DELIMITER $$
 CREATE PROCEDURE PAGetPeso(
@@ -250,7 +248,7 @@ if _Opcion='TODO' then
     /*8*/ peso.`ObservE` AS ObservE,
     /*9*/ peso.`ObservS` AS ObservS,
     /*10*/ peso.`Estado` AS Estado,
-    /*11*/ peso.`DNI` AS DNI,
+    /*11*/ peso.`IdUsuario` AS IdUsuario,
     /*12*/ proveclien.`IdProveClien` AS IdProveClien,
     /*13*/ proveclien.`RazonSocial` AS RazonSocial,
     /*14*/ peso.`Precinto` AS Precinto,
@@ -296,7 +294,7 @@ if _Opcion='IDPE' then
     /*8*/ peso.`ObservE` AS ObservE,
     /*9*/ peso.`ObservS` AS ObservS,
     /*10*/ peso.`Estado` AS Estado,
-    /*11*/ peso.`DNI` AS DNI,
+    /*11*/ peso.`IdUsuario` AS IdUsuario,
     /*12*/ proveclien.`IdProveClien` AS IdProveClien,
     /*13*/ proveclien.`RazonSocial` AS RazonSocial,
     /*14*/ peso.`Precinto` AS Precinto,
@@ -340,7 +338,7 @@ if _Opcion='PLAC' then
      peso.`ObservE` AS ObservE,
      peso.`ObservS` AS ObservS,
      peso.`Estado` AS Estado,
-     peso.`DNI` AS DNI,
+     /*11*/ peso.`IdUsuario` AS IdUsuario,
      proveclien.`IdProveClien` AS IdProveClien,
      proveclien.`RazonSocial` AS RazonSocial,
      peso.`Precinto` AS Precinto,

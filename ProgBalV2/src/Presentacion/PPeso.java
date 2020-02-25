@@ -548,7 +548,7 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
                         Estado, 
                        
                         //Integer.parseInt(PMenu.LblIdUsuario.getText()),               CAMBIAR ESTE CAMPO CUANDO ESTE LA VENTANA PRINCIPAL
-                        Integer.parseInt("70605597"),
+                        Integer.parseInt("1"),
                         DefaultValue.Number(TxtIdProveClien.getText()),
                         123456,//CAMBIAR CODIGO PRECINTO
                         DefaultValue.Number(TxtIdConductorVehiculo.getText()),
@@ -636,7 +636,7 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
  Estado, 
                        
                         //Integer.parseInt(PMenu.LblIdUsuario.getText()),               CAMBIAR ESTE CAMPO CUANDO ESTE LA VENTANA PRINCIPAL
-                        Integer.parseInt("70605597"),
+                        Integer.parseInt("1"),
                         DefaultValue.Number(TxtIdProveClien.getText()),
                         123456,//CAMBIAR CODIGO PRECINTO
                          DefaultValue.Number(TxtIdConductorVehiculo.getText()),
