@@ -32,9 +32,9 @@ import javax.swing.JOptionPane;
 //import net.sf.jasperreports.engine.JasperPrintManager;
 //import net.sf.jasperreports.engine.JasperReport;
 //import net.sf.jasperreports.view.JasperViewer;
-//import gnu.io.CommPort;
-//import gnu.io.CommPortIdentifier;
-//import gnu.io.SerialPort;
+import gnu.io.CommPort;
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
 import java.awt.event.KeyEvent;
 
 import java.io.IOException;
@@ -54,7 +54,7 @@ public class PPeso extends javax.swing.JFrame {
     public PPeso() {
         initComponents();
         TxtIdConductorVehiculo.setVisible(true);
-//Arrancar();
+Arrancar();
         
         
         
@@ -66,25 +66,57 @@ public class PPeso extends javax.swing.JFrame {
      /*-----------------------------------------------------------------PUERTO COM ---------------------------------------------*/
     
     
-//    CommPortIdentifier portId;
-//	Enumeration puertos;
-//	SerialPort serialport;
-//	static InputStream entrada = null;
-//	Thread t;
+    CommPortIdentifier portId;
+	Enumeration puertos;
+	SerialPort serialport;
+	static InputStream entrada = null;
+	Thread t;
+       
     
     
-    /*	public static class LeerSerial implements Runnable {
+   	public static class LeerSerial implements Runnable {
 	   int aux;
+            String Valor="";
+           
+           
        public void run () {
     	   while(true){
     		  try {
 				aux = entrada.read(); // aqui estamos obteniendo nuestro dato serial
-				Thread.sleep(100);
- 				if (aux>0) {
-					System.out.println((char)aux);//imprimimos el dato serial
-                                        TxtPesoVarianza.setText(String.valueOf((char)aux));
-				}				
+				Thread.sleep(70);
+// 				if (aux>0) {
+//					System.out.print((char)aux);//imprimimos el dato serial
+//                                        Valor=Valor+Character.toString((char)aux);
+//                                         TxtPesoVarianza.setText(Valor);
+//                                     
+//                                        
+//                                       
+//				}	
+
+
+                                        if ( aux!=13 && aux!=10 ) {
+                                           // System.out.print(aux);
+					//System.out.print((char)aux);//imprimimos el dato serial
+                                        Valor=Valor+Character.toString((char)aux);
+                                        //Valor2=Valor;
+                                        
+                                           
+                                             //   TxtPesoVarianza.setText(Valor);
+                                           
+                                             
+                                   
+                                        
+                                       
+				}else if(aux==10 ){
+                                         TxtPesoVarianza.setText(Valor);
+                                       Valor="";
+                                        }
+                                        
+                                     
+
+
 			} catch (Exception e) {
+                            System.out.println(e);
  			} } }}
 
     
@@ -96,9 +128,9 @@ public class PPeso extends javax.swing.JFrame {
         	//hasmorelements mientras tenga mas eleementos
         	portId = (CommPortIdentifier) puertos.nextElement(); //next elemento recorre uno por uno
         	System.out.println(portId.getName()); //puertos disponbibles
-        	if (portId.getName().equalsIgnoreCase("COM13")) {
+        	if (portId.getName().equalsIgnoreCase("COM4")) {
         		try {
-        		serialport= (SerialPort)portId.open("fdf", 500);//tiempo en ms
+        		serialport= (SerialPort)portId.open("fdf", 70);//tiempo en ms
     				entrada = serialport.getInputStream();//esta variable del tipo InputStream obtiene el dato serial
    				t.start(); // inciamos el hilo para realizar nuestra accion de imprimir el dato serial
      		 
@@ -109,7 +141,7 @@ public class PPeso extends javax.swing.JFrame {
     
     
     
-    */
+    
     
     
     
@@ -1075,6 +1107,7 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
 
         jPanel7.setBackground(new java.awt.Color(0, 102, 0));
 
+        TxtPesoVarianza.setEditable(false);
         TxtPesoVarianza.setBackground(new java.awt.Color(0, 0, 0));
         TxtPesoVarianza.setFont(new java.awt.Font("Segoe UI Emoji", 1, 48)); // NOI18N
         TxtPesoVarianza.setForeground(new java.awt.Color(255, 255, 255));
@@ -1367,7 +1400,6 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
         jButton1.setBorderPainted(false);
         jButton1.setFocusPainted(false);
         jButton1.setFocusable(false);
-        jButton1.setOpaque(true);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -1380,7 +1412,6 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
         jButton2.setBorderPainted(false);
         jButton2.setFocusPainted(false);
         jButton2.setFocusable(false);
-        jButton2.setOpaque(true);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -1393,7 +1424,6 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
         BtnEliminar.setBorderPainted(false);
         BtnEliminar.setFocusPainted(false);
         BtnEliminar.setFocusable(false);
-        BtnEliminar.setOpaque(true);
         BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEliminarActionPerformed(evt);
@@ -1524,7 +1554,6 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AImagenes/BALANZA.PNG"))); // NOI18N
         jButton12.setBorderPainted(false);
         jButton12.setFocusPainted(false);
-        jButton12.setOpaque(true);
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
@@ -1546,7 +1575,6 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
         jButton13.setBorderPainted(false);
         jButton13.setFocusPainted(false);
         jButton13.setFocusable(false);
-        jButton13.setOpaque(true);
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton13ActionPerformed(evt);
@@ -1578,7 +1606,6 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
         jButton14.setBorderPainted(false);
         jButton14.setFocusPainted(false);
         jButton14.setFocusable(false);
-        jButton14.setOpaque(true);
         jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton14ActionPerformed(evt);
@@ -1623,7 +1650,6 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
         jButton19.setBorderPainted(false);
         jButton19.setFocusPainted(false);
         jButton19.setFocusable(false);
-        jButton19.setOpaque(true);
         jButton19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton19ActionPerformed(evt);
@@ -1643,7 +1669,6 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
         BtnEliminar1.setBorderPainted(false);
         BtnEliminar1.setFocusPainted(false);
         BtnEliminar1.setFocusable(false);
-        BtnEliminar1.setOpaque(true);
         BtnEliminar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEliminar1ActionPerformed(evt);
@@ -2226,7 +2251,9 @@ String ID=JOptionPane.showInputDialog("Ingresar ID para busqueda:");
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void TxtPesoVarianzaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPesoVarianzaKeyPressed
-
+if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+					JOptionPane.showMessageDialog(null,"Has pulsado Enter");
+				}
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtPesoVarianzaKeyPressed
 
