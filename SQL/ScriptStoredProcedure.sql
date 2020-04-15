@@ -385,7 +385,7 @@ BEGIN
 
   
   if _Opcion='L' then
-  select U.IdUsuario, U.Usuario, U.Contrasena from Usuario U where U.Usuario=_Usuario and U.Contrasena=_Contrasena 
+  select U.IdUsuario, U.Usuario, U.Contrasena from Usuario U where U.Usuario=_Usuario and U.Contrasena=_Contrasena and Estado=1
   order by U.IdUsuario desc ;
   
   End If;
