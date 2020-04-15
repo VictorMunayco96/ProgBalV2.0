@@ -54,7 +54,7 @@ public class PPeso extends javax.swing.JFrame {
     public PPeso() {
         initComponents();
         TxtIdConductorVehiculo.setVisible(true);
-Arrancar();
+//Arrancar();
         
         
         
@@ -1107,7 +1107,6 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
 
         jPanel7.setBackground(new java.awt.Color(0, 102, 0));
 
-        TxtPesoVarianza.setEditable(false);
         TxtPesoVarianza.setBackground(new java.awt.Color(0, 0, 0));
         TxtPesoVarianza.setFont(new java.awt.Font("Segoe UI Emoji", 1, 48)); // NOI18N
         TxtPesoVarianza.setForeground(new java.awt.Color(255, 255, 255));
@@ -2097,9 +2096,9 @@ String ID=JOptionPane.showInputDialog("Ingresar ID para busqueda:");
       //  TxtDNI.setText(TblPeso.getValueAt(0, 11).toString());
         TxtIdProveClien.setText(TblPeso.getValueAt(0, 12).toString());
         TxtRazonSocial.setText(TblPeso.getValueAt(0, 13).toString());
-        TxtIdConductorVehiculo.setText(TblPeso.getValueAt(0, 14).toString());
-        TxtPlaca.setText(TblPeso.getValueAt(0, 15).toString());
-        TxtChofer.setText(TblPeso.getValueAt(0, 16).toString() + " " + TblPeso.getValueAt(0, 17).toString());
+        TxtIdConductorVehiculo.setText(TblPeso.getValueAt(0, 15).toString());
+        TxtPlaca.setText(TblPeso.getValueAt(0, 16).toString());
+        TxtChofer.setText(TblPeso.getValueAt(0, 17).toString());
         TxtIdDestino.setText(TblPeso.getValueAt(0, 18).toString());
         TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
         TxtIdProducto.setText(TblPeso.getValueAt(0, 20).toString());
@@ -2144,21 +2143,25 @@ String ID=JOptionPane.showInputDialog("Ingresar ID para busqueda:");
 
                 if (TblPeso.getValueAt(0, 18).toString().equals("1")) {
                     TxtIdDestino.setText("");
+                     TxtDestino.setText("");
                 }else{
                     TxtIdDestino.setText(TblPeso.getValueAt(0, 18).toString());
+                     TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
                 }
-        TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
+        //TxtDestino.setText(TblPeso.getValueAt(0, 19).toString());
 
         //TxtIdProducto.setText(TblPeso.getValueAt(0, 20).toString());
         
          if (TblPeso.getValueAt(0, 20).toString().equals("1")) {
                     TxtIdProducto.setText("");
+                    TxtProducto.setText("");
                 }else{
                     TxtIdProducto.setText(TblPeso.getValueAt(0, 20).toString());
+                    TxtProducto.setText(TblPeso.getValueAt(0, 21).toString());
                 }
         
         
-        TxtProducto.setText(TblPeso.getValueAt(0, 21).toString());
+      //  TxtProducto.setText(TblPeso.getValueAt(0, 21).toString());
         Accion = "DES";
         } catch (NullPointerException e) {
             
@@ -2251,9 +2254,7 @@ String ID=JOptionPane.showInputDialog("Ingresar ID para busqueda:");
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void TxtPesoVarianzaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPesoVarianzaKeyPressed
-if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-					JOptionPane.showMessageDialog(null,"Has pulsado Enter");
-				}
+
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtPesoVarianzaKeyPressed
 

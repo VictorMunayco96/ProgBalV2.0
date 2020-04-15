@@ -372,6 +372,25 @@ FROM
   END
   
 $$
+
+
+DELIMITER $$
+CREATE PROCEDURE PAGetUsuario(
+in _Usuario varchar(45),
+in _Contrasena varchar(45),
+in _Opcion varchar(1)
+)
+BEGIN
+
+
+  
+  if _Opcion='L' then
+  select U.IdUsuario, U.Usuario, U.Contrasena from Usuario U where U.Usuario=_Usuario and U.Contrasena=_Contrasena 
+  order by U.IdUsuario desc ;
+  
+  End If;
+  END
+$$
    
    
    
