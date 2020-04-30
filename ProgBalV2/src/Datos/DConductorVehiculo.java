@@ -60,9 +60,23 @@ String[] titulos = {"ID","ID","PLACA","NOMBRE Y APELLIDOS"};
 
         try {
 
-            CallableStatement Proc = Con.prepareCall(" CALL PAGetCoductorVehiculo(?,?)");
-Proc.setString(1, Campo.getPlaca());
-Proc.setString(2, Campo.getOpcion());
+            
+            
+            String SQL="";
+            if(Campo.getOpcion().equals("PLAC")){
+SQL=" select CV.IdConductorVehiculo, CV.IdPlaca, V.Placa,C.Nombre,C.Apellidos from Conductor C\n" +
+"     inner join (ConductorVehiculo CV inner join Vehiculo V on CV.IdPlaca=V.IdPlaca) on C.IdConductor=CV.IdConductor\n" +
+"     where V.Placa='"+Campo.getPlaca()+"' and CV.Estado=1\n" +
+"     order by CV.IdConductorVehiculo desc";
+            }
+            
+            
+            CallableStatement Proc = Con.prepareCall(SQL);
+            
+            
+            
+//Proc.setString(1, Campo.getPlaca());
+//Proc.setString(2, Campo.getOpcion());
 Proc.execute();
             ResultSet rs = Proc.executeQuery();
             while (rs.next()) {

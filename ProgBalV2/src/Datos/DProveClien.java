@@ -70,11 +70,31 @@ String[] titulos = {"ID","PROVEEDOR/CLIENTE","RUC"};
         modelo = new DefaultTableModel(null, titulos);
 
         try {
+            
+                    String SQL="";
+            if(Campo.getOpcion().equals("TODO")){
+SQL="select IdProveClien, RazonSocial, Ruc from ProveClien where Estado=1\n" +
+"     order by IdProveClien desc";
+            }
+            
+             if(Campo.getOpcion().equals("RAZO")){
+SQL="     select IdProveClien, RazonSocial, Ruc from ProveClien \n" +
+"     where RazonSocial like concat('%','"+Campo.getRazonSocial()+"','%') and Estado=1\n" +
+"     order by IdProveClien desc; ";
+            }
+             
+             if(Campo.getOpcion().equals("IDPR")){
+SQL="  select IdProveClien, RazonSocial, Ruc from ProveClien \n" +
+"     where IdProveClien='"+Campo.getIdProveClien()+"' and Estado=1 \n" +
+"     order by IdProveClien desc; ";
+            }
+            
+            
 
-            CallableStatement Proc = Con.prepareCall(" CALL PAGetProveClien(?,?,?)");
-Proc.setInt(1, Campo.getIdProveClien());
-Proc.setString(2, Campo.getRazonSocial());
-Proc.setString(3, Campo.getOpcion());
+            CallableStatement Proc = Con.prepareCall(SQL);
+//Proc.setInt(1, Campo.getIdProveClien());
+//Proc.setString(2, Campo.getRazonSocial());
+//Proc.setString(3, Campo.getOpcion());
 Proc.execute();
             ResultSet rs = Proc.executeQuery();
             while (rs.next()) {

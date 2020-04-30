@@ -69,11 +69,26 @@ String[] titulos = {"ID","Producto"};
         modelo = new DefaultTableModel(null, titulos);
 
         try {
-
-            CallableStatement Proc = Con.prepareCall(" CALL PAGetDescProd(?,?,?)");
-Proc.setInt(1, Campo.getIdDescProd());
-Proc.setString(2, Campo.getDescProd());
-Proc.setString(3, Campo.getOpcion());
+            String SQL="";
+            if(Campo.getOpcion().equals("TODO")){
+SQL="select IdDescProd, DescProd from DescProd where Estado=1  order by IdDescProd desc";
+            }
+            
+             if(Campo.getOpcion().equals("DESC")){
+SQL="select IdDescProd, DescProd from DescProd where DescProd like concat('%','"+Campo.getDescProd()+"','%') and Estado=1 order by IdDescProd desc;";
+            }
+             
+             if(Campo.getOpcion().equals("IDDE")){
+SQL="select IdDescProd, DescProd from DescProd where IdDescProd='"+Campo.getDescProd()+"' and Estado=1 order by IdDescProd desc;";
+            }
+            
+            
+            
+            
+            CallableStatement Proc = Con.prepareCall(SQL);
+//Proc.setInt(1, Campo.getIdDescProd());
+//Proc.setString(2, Campo.getDescProd());
+//Proc.setString(3, Campo.getOpcion());
 Proc.execute();
             ResultSet rs = Proc.executeQuery();
             while (rs.next()) {

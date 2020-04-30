@@ -62,18 +62,17 @@ public class Conexion {
     
       public Connection Conexion() 
              {
-                 leerTexto("C:\\SOFT/conexion2.txt");
+                 leerTexto("C:/SOFT/conexion2.txt");
           Connection cn = null;
           
                  try {
-                     Class.forName("com.mysql.jdbc.Driver");
-       
-        cn = DriverManager.getConnection("jdbc:mysql://"+servidor+":"+puerto+"/"+baseDatos+"",user,password);
-        
-     
+                    Class.forName("com.mysql.jdbc.Driver");
+    
+      cn = DriverManager.getConnection("jdbc:mysql://"+servidor+":"+puerto+"/"+baseDatos,user,password);
+         
                  } catch (Exception e) {
                      
-                     
+                  
                      JOptionPane.showMessageDialog(null, e+" No se ha podido conectar");
                      
                  }

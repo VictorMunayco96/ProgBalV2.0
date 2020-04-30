@@ -223,8 +223,7 @@ $$
    
    
    
- 
- 
+  
 DELIMITER $$
 CREATE PROCEDURE PAGetPeso(
 in _IdPeso Int,
@@ -237,142 +236,141 @@ BEGIN
 
 if _Opcion='TODO' then
  SELECT
-   /*0*/  peso.`IdPeso` AS IdPeso, 
-   /*1*/  peso.`TipoMovimiento` AS TipoMovimiento,
-	/*2*/ peso.`NumGuia` AS NumGuia,
-    /*3*/ peso.`FechaHoraSal` AS FechaHoraSal,
-    /*4*/ peso.`FechaHoraEnt` AS FechaHoraEnt,
-    /*5*/ peso.`PesoCE` AS PesoCE,
-    /*6*/ peso.`PesoCS` AS PesoCS,
-    /*7*/ peso.`NetoC` AS NetoC,
-    /*8*/ peso.`ObservE` AS ObservE,
-    /*9*/ peso.`ObservS` AS ObservS,
-    /*10*/ peso.`Estado` AS Estado,
-    /*11*/ peso.`IdUsuario` AS IdUsuario,
-    /*12*/ proveclien.`IdProveClien` AS IdProveClien,
-    /*13*/ proveclien.`RazonSocial` AS RazonSocial,
-    /*14*/ peso.`Precinto` AS Precinto,
-    /*15*/ conductorvehiculo.`IdConductorVehiculo` AS IdConductorVehiculo,
-    /*16*/ vehiculo.`Placa` AS Placa,
-	/*17*/concat(conductor.`Nombre`," ",conductor.`Apellidos`) AS Nombre,
-    /*18*/ destinoBloq.`IdDestinoBloq` AS IdDestino,
-    /*19*/ concat(destino.destino,"/ ",concat(destinodesc.`DestinoDes`,"/ ",destinoBloq.`DestinoBloq`)) AS Destino,
+     P.`IdPeso` AS IdPeso,
+     P.`TipoMovimiento` AS TipoMovimiento,
+     P.`NumGuia` AS NumGuia,
+     P.`FechaHoraSal` AS FechaHoraSal,
+     P.`FechaHoraEnt` AS FechaHoraEnt,
+     P.`PesoCE` AS PesoCE,
+     P.`PesoCS` AS PesoCS,
+     P.`NetoC` AS NetoC,
+     P.`ObservE` AS ObservE,
+     P.`ObservS` AS ObservS,
+     P.`Estado` AS Estado,
+     P.`IdUsuario` AS IdUsuario,
+     PC.`IdProveClien` AS IdProveClien,
+     PC.`RazonSocial` AS RazonSocial,
+     P.`Precinto` AS Precinto,
+     CV.`IdConductorVehiculo` AS IdConductorVehiculo,
+     V.`Placa` AS Placa,
+     concat(C.`Nombre`," ",C.`Apellidos`) AS Nombre,
+     DB.`IdDestinoBloq` AS IdDestino,
+     concat(D.destino,"/ ",concat(DD.`DestinoDes`,"/ ",DB.`DestinoBloq`)) AS Destino,
      
      
-  /*20*/   DescProd.`IdDescProd` AS IdDescProd,
- /*21*/    DescProd.`DescProd` AS DescProd
+     DP.`IdDescProd` AS IdDescProd,
+     DP.`DescProd` AS DescProd
 FROM
-     `proveclien` proveclien INNER JOIN `peso` peso ON proveclien.`IdProveClien` = peso.`IdProveClien`
-     INNER JOIN `conductorvehiculo` conductorvehiculo ON peso.`IdConductorVehiculo` = conductorvehiculo.`IdConductorVehiculo`
-     INNER JOIN `destinobloq` destinobloq ON peso.`IdDestinobloq` = destinobloq.`IdDestinobloq`
-     INNER JOIN `DescProd` DescProd ON peso.`IdDescProd` = DescProd.`IdDescProd`
-     INNER JOIN `conductor` conductor ON conductorvehiculo.`IdConductor` = conductor.`IdConductor`
-     INNER JOIN `vehiculo` vehiculo ON conductorvehiculo.`IdPlaca` = vehiculo.`IdPlaca`
-     INNER JOIN `DestinoDesc` destinodesc  ON destinobloq.`IdDestinoDesc` = destinodesc.`IdDestinoDesc`
-	 INNER JOIN `Destino` destino  ON destinodesc.`IdDestino` = destino.`IdDestino`
+     ProveClien PC  INNER JOIN Peso P ON PC.`IdProveClien` = P.`IdProveClien`
+     INNER JOIN ConductorVehiculo CV ON P.`IdConductorVehiculo` = CV.`IdConductorVehiculo`
+     INNER JOIN DestinoBloq DB ON P.`IdDestinobloq` = DB.`IdDestinobloq`
+     INNER JOIN DescProd DP ON P.`IdDescProd` = DP.`IdDescProd`
+     INNER JOIN Conductor C ON CV.`IdConductor` = C.`IdConductor`
+     INNER JOIN Vehiculo V ON CV.`IdPlaca` = V.`IdPlaca`
+     INNER JOIN DestinoDesc DD  ON DB.`IdDestinoDesc` = DD.`IdDestinoDesc`
+	 INNER JOIN Destino D  ON DD.`IdDestino` = D.`IdDestino`
    
      
 
      
-     where peso.`Estado`="D" 
+     where P.`Estado`="D" 
      
-     order by IdPeso Desc limit 14000;
+     order by P.IdPeso Desc limit 14000;
      End If;
 
 
 
 if _Opcion='IDPE' then
  SELECT
-   /*0*/  peso.`IdPeso` AS IdPeso, 
-   /*1*/  peso.`TipoMovimiento` AS TipoMovimiento,
-	/*2*/ peso.`NumGuia` AS NumGuia,
-    /*3*/ peso.`FechaHoraSal` AS FechaHoraSal,
-    /*4*/ peso.`FechaHoraEnt` AS FechaHoraEnt,
-    /*5*/ peso.`PesoCE` AS PesoCE,
-    /*6*/ peso.`PesoCS` AS PesoCS,
-    /*7*/ peso.`NetoC` AS NetoC,
-    /*8*/ peso.`ObservE` AS ObservE,
-    /*9*/ peso.`ObservS` AS ObservS,
-    /*10*/ peso.`Estado` AS Estado,
-    /*11*/ peso.`IdUsuario` AS IdUsuario,
-    /*12*/ proveclien.`IdProveClien` AS IdProveClien,
-    /*13*/ proveclien.`RazonSocial` AS RazonSocial,
-    /*14*/ peso.`Precinto` AS Precinto,
-    /*15*/ conductorvehiculo.`IdConductorVehiculo` AS IdConductorVehiculo,
-    /*16*/ vehiculo.`Placa` AS Placa,
-	/*17*/concat(conductor.`Nombre`," ",conductor.`Apellidos`) AS Nombre,
-    /*18*/ destinoBloq.`IdDestinoBloq` AS IdDestino,
-    /*19*/ concat(destino.destino,"/ ",concat(destinodesc.`DestinoDes`,"/ ",destinoBloq.`DestinoBloq`)) AS Destino,
+     P.`IdPeso` AS IdPeso,
+     P.`TipoMovimiento` AS TipoMovimiento,
+     P.`NumGuia` AS NumGuia,
+     P.`FechaHoraSal` AS FechaHoraSal,
+     P.`FechaHoraEnt` AS FechaHoraEnt,
+     P.`PesoCE` AS PesoCE,
+     P.`PesoCS` AS PesoCS,
+     P.`NetoC` AS NetoC,
+     P.`ObservE` AS ObservE,
+     P.`ObservS` AS ObservS,
+     P.`Estado` AS Estado,
+     P.`IdUsuario` AS IdUsuario,
+     PC.`IdProveClien` AS IdProveClien,
+     PC.`RazonSocial` AS RazonSocial,
+     P.`Precinto` AS Precinto,
+     CV.`IdConductorVehiculo` AS IdConductorVehiculo,
+     V.`Placa` AS Placa,
+     concat(C.`Nombre`," ",C.`Apellidos`) AS Nombre,
+     DB.`IdDestinoBloq` AS IdDestino,
+     concat(D.destino,"/ ",concat(DD.`DestinoDes`,"/ ",DB.`DestinoBloq`)) AS Destino,
      
      
-  /*20*/   DescProd.`IdDescProd` AS IdDescProd,
- /*21*/    DescProd.`DescProd` AS DescProd
+     DP.`IdDescProd` AS IdDescProd,
+     DP.`DescProd` AS DescProd
 FROM
-     `proveclien` proveclien INNER JOIN `peso` peso ON proveclien.`IdProveClien` = peso.`IdProveClien`
-     INNER JOIN `conductorvehiculo` conductorvehiculo ON peso.`IdConductorVehiculo` = conductorvehiculo.`IdConductorVehiculo`
-     INNER JOIN `destinobloq` destinobloq ON peso.`IdDestinobloq` = destinobloq.`IdDestinobloq`
-     INNER JOIN `DescProd` DescProd ON peso.`IdDescProd` = DescProd.`IdDescProd`
-     INNER JOIN `conductor` conductor ON conductorvehiculo.`IdConductor` = conductor.`IdConductor`
-     INNER JOIN `vehiculo` vehiculo ON conductorvehiculo.`IdPlaca` = vehiculo.`IdPlaca`
-     INNER JOIN `DestinoDesc` destinodesc  ON destinobloq.`IdDestinoDesc` = destinodesc.`IdDestinoDesc`
-	 INNER JOIN `Destino` destino  ON destinodesc.`IdDestino` = destino.`IdDestino`
+     ProveClien PC  INNER JOIN Peso P ON PC.`IdProveClien` = P.`IdProveClien`
+     INNER JOIN ConductorVehiculo CV ON P.`IdConductorVehiculo` = CV.`IdConductorVehiculo`
+     INNER JOIN DestinoBloq DB ON P.`IdDestinobloq` = DB.`IdDestinobloq`
+     INNER JOIN DescProd DP ON P.`IdDescProd` = DP.`IdDescProd`
+     INNER JOIN Conductor C ON CV.`IdConductor` = C.`IdConductor`
+     INNER JOIN Vehiculo V ON CV.`IdPlaca` = V.`IdPlaca`
+     INNER JOIN DestinoDesc DD  ON DB.`IdDestinoDesc` = DD.`IdDestinoDesc`
+	 INNER JOIN Destino D  ON DD.`IdDestino` = D.`IdDestino`
    
      
 
      
-     where Peso.IdPeso=_IdPeso AND peso.`Estado`="D" 
+     where P.IdPeso=_IdPeso AND P.`Estado`="D" 
      
-     order by IdPeso Desc limit 14000;
+     order by P.IdPeso Desc limit 14000;
      End If;
 
 if _Opcion='PLAC' then
  SELECT
-     peso.`IdPeso` AS IdPeso,
-     peso.`TipoMovimiento` AS TipoMovimiento,
-     peso.`NumGuia` AS NumGuia,
-     peso.`FechaHoraSal` AS FechaHoraSal,
-     peso.`FechaHoraEnt` AS FechaHoraEnt,
-     peso.`PesoCE` AS PesoCE,
-     peso.`PesoCS` AS PesoCS,
-     peso.`NetoC` AS NetoC,
-     peso.`ObservE` AS ObservE,
-     peso.`ObservS` AS ObservS,
-     peso.`Estado` AS Estado,
-     /*11*/ peso.`IdUsuario` AS IdUsuario,
-     proveclien.`IdProveClien` AS IdProveClien,
-     proveclien.`RazonSocial` AS RazonSocial,
-     peso.`Precinto` AS Precinto,
-     conductorvehiculo.`IdConductorVehiculo` AS IdConductorVehiculo,
-     vehiculo.`Placa` AS Placa,
-     concat(conductor.`Nombre`," ",conductor.`Apellidos`) AS Nombre,
-     destinoBloq.`IdDestinoBloq` AS IdDestino,
-     concat(destino.destino,"/ ",concat(destinodesc.`DestinoDes`,"/ ",destinoBloq.`DestinoBloq`)) AS Destino,
+     P.`IdPeso` AS IdPeso,
+     P.`TipoMovimiento` AS TipoMovimiento,
+     P.`NumGuia` AS NumGuia,
+     P.`FechaHoraSal` AS FechaHoraSal,
+     P.`FechaHoraEnt` AS FechaHoraEnt,
+     P.`PesoCE` AS PesoCE,
+     P.`PesoCS` AS PesoCS,
+     P.`NetoC` AS NetoC,
+     P.`ObservE` AS ObservE,
+     P.`ObservS` AS ObservS,
+     P.`Estado` AS Estado,
+     P.`IdUsuario` AS IdUsuario,
+     PC.`IdProveClien` AS IdProveClien,
+     PC.`RazonSocial` AS RazonSocial,
+     P.`Precinto` AS Precinto,
+     CV.`IdConductorVehiculo` AS IdConductorVehiculo,
+     V.`Placa` AS Placa,
+     concat(C.`Nombre`," ",C.`Apellidos`) AS Nombre,
+     DB.`IdDestinoBloq` AS IdDestino,
+     concat(D.destino,"/ ",concat(DD.`DestinoDes`,"/ ",DB.`DestinoBloq`)) AS Destino,
      
      
-     DescProd.`IdDescProd` AS IdDescProd,
-     DescProd.`DescProd` AS DescProd
+     DP.`IdDescProd` AS IdDescProd,
+     DP.`DescProd` AS DescProd
 FROM
-     `proveclien` proveclien INNER JOIN `peso` peso ON proveclien.`IdProveClien` = peso.`IdProveClien`
-     INNER JOIN `conductorvehiculo` conductorvehiculo ON peso.`IdConductorVehiculo` = conductorvehiculo.`IdConductorVehiculo`
-     INNER JOIN `destinobloq` destinobloq ON peso.`IdDestinobloq` = destinobloq.`IdDestinobloq`
-     INNER JOIN `DescProd` DescProd ON peso.`IdDescProd` = DescProd.`IdDescProd`
-     INNER JOIN `conductor` conductor ON conductorvehiculo.`IdConductor` = conductor.`IdConductor`
-     INNER JOIN `vehiculo` vehiculo ON conductorvehiculo.`IdPlaca` = vehiculo.`IdPlaca`
-     INNER JOIN `DestinoDesc` destinodesc  ON destinobloq.`IdDestinoDesc` = destinodesc.`IdDestinoDesc`
-	 INNER JOIN `Destino` destino  ON destinodesc.`IdDestino` = destino.`IdDestino`
+     ProveClien PC  INNER JOIN Peso P ON PC.`IdProveClien` = P.`IdProveClien`
+     INNER JOIN ConductorVehiculo CV ON P.`IdConductorVehiculo` = CV.`IdConductorVehiculo`
+     INNER JOIN DestinoBloq DB ON P.`IdDestinobloq` = DB.`IdDestinobloq`
+     INNER JOIN DescProd DP ON P.`IdDescProd` = DP.`IdDescProd`
+     INNER JOIN Conductor C ON CV.`IdConductor` = C.`IdConductor`
+     INNER JOIN Vehiculo V ON CV.`IdPlaca` = V.`IdPlaca`
+     INNER JOIN DestinoDesc DD  ON DB.`IdDestinoDesc` = DD.`IdDestinoDesc`
+	 INNER JOIN Destino D  ON DD.`IdDestino` = D.`IdDestino`
    
      
 
-     where vehiculo.`Placa`=_Placa and peso.`Estado`="T" 
+     where V.`Placa`=_Placa and P.`Estado`="T" 
      
-     order by IdPeso Desc limit 14000;
+     order by P.IdPeso Desc limit 14000;
      End If;
      
 
   END
   
 $$
-
 
 DELIMITER $$
 CREATE PROCEDURE PAGetUsuario(

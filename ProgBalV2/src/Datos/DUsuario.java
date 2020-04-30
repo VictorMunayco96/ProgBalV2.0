@@ -76,13 +76,14 @@ String[] titulos = {"ID USUARIO","USUARIO","CONTRASEÑA"};
 
         try {
 
-            CallableStatement Proc = Con.prepareCall("CALL PAGetUsuario(?,?,?)");
+            CallableStatement Proc = Con.prepareCall("select U.IdUsuario, U.Usuario, U.Contrasena from Usuario U where U.Usuario=? and U.Contrasena=? and Estado=1\n" +
+"  order by U.IdUsuario desc ");
 
 
 
         Proc.setString(1, Campo.getUsuario());
         Proc.setString(2, Campo.getContrasena());
-        Proc.setString(3, Campo.getOpcion());
+     
         Proc.execute();
             ResultSet rs = Proc.executeQuery();
             while (rs.next()) {

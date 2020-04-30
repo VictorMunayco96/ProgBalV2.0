@@ -230,26 +230,51 @@ public String DSetPeso(DPeso Campo) {
         Conexion Cn = new Conexion();
         Connection Con = Cn.Conexion();
         String rpta = "";
+        
+        
+        String SQL="";
+            if(Campo.getOpcion().equals("I")){
+SQL="insert into Peso (TipoMovimiento, NumGuia, FechaHoraSal, FechaHoraEnt, PesoCE, PesoCS, NetoC, ObservE, ObservS, Estado,IdUsuario,\n" +
+"  IdProveClien, Precinto,IdDestinoBloq, IdDescProd, IdConductorVehiculo)\n" +
+"  values('"+Campo.getTipoMovimiento()+"','"+Campo.getNumGuia()+"','"+Campo.getFechaHoraSal()+"','"+Campo.getFechaHoraEnt()+"', '"+Campo.getPesoCE()+"', '"+Campo.getPesoCS()+"','"+Campo.getNetoC()+"','"+Campo.getObservE()+"','"+Campo.getObservS()+"', '"+Campo.getEstado()+"','"+Campo.getDNI()+"',\n" +
+"  '"+Campo.getIdProveClien()+"', '"+Campo.getPrecinto()+"','"+Campo.getIdDestinoBloq()+"', '"+Campo.getIdDescProd()+"', '"+Campo.getIdConductorVehiculo()+"');";
+            }
+            
+             if(Campo.getOpcion().equals("U")){
+SQL="Update Peso set TipoMovimiento='"+Campo.getTipoMovimiento()+"', NumGuia='"+Campo.getNumGuia()+"', FechaHoraSal='"+Campo.getFechaHoraSal()+"', FechaHoraEnt='"+Campo.getFechaHoraEnt()+"', PesoCE='"+Campo.getPesoCE()+"', PesoCS='"+Campo.getPesoCS()+"', \n" +
+" NetoC='"+Campo.getNetoC()+"', ObservE='"+Campo.getObservE()+"', ObservS='"+Campo.getObservS()+"', Estado='"+Campo.getEstado()+"',IdUsuario='"+Campo.getDNI()+"', IdProveClien='"+Campo.getIdProveClien()+"', Precinto='"+Campo.getPrecinto()+"', IdDestinoBloq='"+Campo.getIdDestinoBloq()+"', IdDescProd='"+Campo.getIdDescProd()+"', IdConductorVehiculo='"+Campo.getIdConductorVehiculo()+"' where IdPeso='"+Campo.getIdPeso()+"';";
+            }
+             
+             if(Campo.getOpcion().equals("D")){
+SQL="Update Peso set Estado='I' where IdPeso='"+Campo.getIdPeso()+"';";
+            }
+        
+        
+        
+        
+        
+        
+        
  try {
-            CallableStatement Proc = Con.prepareCall(" CALL PASetPeso(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-Proc.setInt(1, Campo.getIdPeso());
-Proc.setString(2, Campo.getTipoMovimiento());
-Proc.setLong(3, Campo.getNumGuia());
-Proc.setString(4, Campo.getFechaHoraSal());
-Proc.setString(5, Campo.getFechaHoraEnt());
-Proc.setInt(6, Campo.getPesoCE());
-Proc.setInt(7, Campo.getPesoCS());
-Proc.setInt(8, Campo.getNetoC());
-Proc.setString(9, Campo.getObservE());
-Proc.setString(10, Campo.getObservS());
-Proc.setString(11, Campo.getEstado());
-Proc.setInt(12, Campo.getDNI());
-Proc.setInt(13, Campo.getIdProveClien());
-Proc.setInt(14, Campo.getPrecinto());
-Proc.setInt(15, Campo.getIdConductorVehiculo());
-Proc.setInt(16, Campo.getIdDestinoBloq());
-Proc.setInt(17, Campo.getIdDescProd());
-Proc.setString(18, Campo.getOpcion());
+            CallableStatement Proc = Con.prepareCall(SQL);
+//Proc.setInt(1, Campo.getIdPeso());
+//Proc.setString(2, Campo.getTipoMovimiento());
+//Proc.setLong(3, Campo.getNumGuia());
+//Proc.setString(4, Campo.getFechaHoraSal());
+//Proc.setString(5, Campo.getFechaHoraEnt());
+//Proc.setInt(6, Campo.getPesoCE());
+//Proc.setInt(7, Campo.getPesoCS());
+//Proc.setInt(8, Campo.getNetoC());
+//Proc.setString(9, Campo.getObservE());
+//Proc.setString(10, Campo.getObservS());
+//Proc.setString(11, Campo.getEstado());
+//Proc.setInt(12, Campo.getDNI());
+//Proc.setInt(13, Campo.getIdProveClien());
+//Proc.setInt(14, Campo.getPrecinto());
+//Proc.setInt(15, Campo.getIdConductorVehiculo());
+//Proc.setInt(16, Campo.getIdDestinoBloq());
+//Proc.setInt(17, Campo.getIdDescProd());
+//Proc.setString(18, Campo.getOpcion());
 
  Proc.execute();
             rpta = "Ingreso correctamente";
@@ -277,11 +302,146 @@ String[] titulos = {"IdPeso", "TipoMovimiento", "NumGuia", "FechaHoraSal", "Fech
         modelo = new DefaultTableModel(null, titulos);
 
         try {
+            
+            
+            String SQL="";
+            if(Campo.getOpcion().equals("TODO")){
+SQL="SELECT\n" +
+"     P.`IdPeso` AS IdPeso,\n" +
+"     P.`TipoMovimiento` AS TipoMovimiento,\n" +
+"     P.`NumGuia` AS NumGuia,\n" +
+"     P.`FechaHoraSal` AS FechaHoraSal,\n" +
+"     P.`FechaHoraEnt` AS FechaHoraEnt,\n" +
+"     P.`PesoCE` AS PesoCE,\n" +
+"     P.`PesoCS` AS PesoCS,\n" +
+"     P.`NetoC` AS NetoC,\n" +
+"     P.`ObservE` AS ObservE,\n" +
+"     P.`ObservS` AS ObservS,\n" +
+"     P.`Estado` AS Estado,\n" +
+"     P.`IdUsuario` AS IdUsuario,\n" +
+"     PC.`IdProveClien` AS IdProveClien,\n" +
+"     PC.`RazonSocial` AS RazonSocial,\n" +
+"     P.`Precinto` AS Precinto,\n" +
+"     CV.`IdConductorVehiculo` AS IdConductorVehiculo,\n" +
+"     V.`Placa` AS Placa,\n" +
+"     concat(C.`Nombre`,\" \",C.`Apellidos`) AS Nombre,\n" +
+"     DB.`IdDestinoBloq` AS IdDestino,\n" +
+"     concat(D.destino,\"/ \",concat(DD.`DestinoDes`,\"/ \",DB.`DestinoBloq`)) AS Destino,\n" +
+"     \n" +
+"     \n" +
+"     DP.`IdDescProd` AS IdDescProd,\n" +
+"     DP.`DescProd` AS DescProd\n" +
+"FROM\n" +
+"     ProveClien PC  INNER JOIN Peso P ON PC.`IdProveClien` = P.`IdProveClien`\n" +
+"     INNER JOIN ConductorVehiculo CV ON P.`IdConductorVehiculo` = CV.`IdConductorVehiculo`\n" +
+"     INNER JOIN DestinoBloq DB ON P.`IdDestinobloq` = DB.`IdDestinobloq`\n" +
+"     INNER JOIN DescProd DP ON P.`IdDescProd` = DP.`IdDescProd`\n" +
+"     INNER JOIN Conductor C ON CV.`IdConductor` = C.`IdConductor`\n" +
+"     INNER JOIN Vehiculo V ON CV.`IdPlaca` = V.`IdPlaca`\n" +
+"     INNER JOIN DestinoDesc DD  ON DB.`IdDestinoDesc` = DD.`IdDestinoDesc`\n" +
+"	 INNER JOIN Destino D  ON DD.`IdDestino` = D.`IdDestino`\n" +
+"   \n" +
+"     \n" +
+"\n" +
+"     \n" +
+"     where P.`Estado`=\"D\" \n" +
+"     \n" +
+"     order by P.IdPeso Desc limit 14000";
+            }
+            
+             if(Campo.getOpcion().equals("IDPE")){
+SQL=" SELECT\n" +
+"     P.`IdPeso` AS IdPeso,\n" +
+"     P.`TipoMovimiento` AS TipoMovimiento,\n" +
+"     P.`NumGuia` AS NumGuia,\n" +
+"     P.`FechaHoraSal` AS FechaHoraSal,\n" +
+"     P.`FechaHoraEnt` AS FechaHoraEnt,\n" +
+"     P.`PesoCE` AS PesoCE,\n" +
+"     P.`PesoCS` AS PesoCS,\n" +
+"     P.`NetoC` AS NetoC,\n" +
+"     P.`ObservE` AS ObservE,\n" +
+"     P.`ObservS` AS ObservS,\n" +
+"     P.`Estado` AS Estado,\n" +
+"     P.`IdUsuario` AS IdUsuario,\n" +
+"     PC.`IdProveClien` AS IdProveClien,\n" +
+"     PC.`RazonSocial` AS RazonSocial,\n" +
+"     P.`Precinto` AS Precinto,\n" +
+"     CV.`IdConductorVehiculo` AS IdConductorVehiculo,\n" +
+"     V.`Placa` AS Placa,\n" +
+"     concat(C.`Nombre`,\" \",C.`Apellidos`) AS Nombre,\n" +
+"     DB.`IdDestinoBloq` AS IdDestino,\n" +
+"     concat(D.destino,\"/ \",concat(DD.`DestinoDes`,\"/ \",DB.`DestinoBloq`)) AS Destino,\n" +
+"     \n" +
+"     \n" +
+"     DP.`IdDescProd` AS IdDescProd,\n" +
+"     DP.`DescProd` AS DescProd\n" +
+"FROM\n" +
+"     ProveClien PC  INNER JOIN Peso P ON PC.`IdProveClien` = P.`IdProveClien`\n" +
+"     INNER JOIN ConductorVehiculo CV ON P.`IdConductorVehiculo` = CV.`IdConductorVehiculo`\n" +
+"     INNER JOIN DestinoBloq DB ON P.`IdDestinobloq` = DB.`IdDestinobloq`\n" +
+"     INNER JOIN DescProd DP ON P.`IdDescProd` = DP.`IdDescProd`\n" +
+"     INNER JOIN Conductor C ON CV.`IdConductor` = C.`IdConductor`\n" +
+"     INNER JOIN Vehiculo V ON CV.`IdPlaca` = V.`IdPlaca`\n" +
+"     INNER JOIN DestinoDesc DD  ON DB.`IdDestinoDesc` = DD.`IdDestinoDesc`\n" +
+"	 INNER JOIN Destino D  ON DD.`IdDestino` = D.`IdDestino`\n" +
+"   \n" +
+"     \n" +
+"\n" +
+"     \n" +
+"     where P.IdPeso='"+Campo.getIdPeso()+"' AND P.`Estado`=\"D\" \n" +
+"     \n" +
+"     order by P.IdPeso Desc limit 14000;";
+            }
+             
+             if(Campo.getOpcion().equals("PLAC")){
+SQL="SELECT\n" +
+"     P.`IdPeso` AS IdPeso,\n" +
+"     P.`TipoMovimiento` AS TipoMovimiento,\n" +
+"     P.`NumGuia` AS NumGuia,\n" +
+"     P.`FechaHoraSal` AS FechaHoraSal,\n" +
+"     P.`FechaHoraEnt` AS FechaHoraEnt,\n" +
+"     P.`PesoCE` AS PesoCE,\n" +
+"     P.`PesoCS` AS PesoCS,\n" +
+"     P.`NetoC` AS NetoC,\n" +
+"     P.`ObservE` AS ObservE,\n" +
+"     P.`ObservS` AS ObservS,\n" +
+"     P.`Estado` AS Estado,\n" +
+"     P.`IdUsuario` AS IdUsuario,\n" +
+"     PC.`IdProveClien` AS IdProveClien,\n" +
+"     PC.`RazonSocial` AS RazonSocial,\n" +
+"     P.`Precinto` AS Precinto,\n" +
+"     CV.`IdConductorVehiculo` AS IdConductorVehiculo,\n" +
+"     V.`Placa` AS Placa,\n" +
+"     concat(C.`Nombre`,\" \",C.`Apellidos`) AS Nombre,\n" +
+"     DB.`IdDestinoBloq` AS IdDestino,\n" +
+"     concat(D.destino,\"/ \",concat(DD.`DestinoDes`,\"/ \",DB.`DestinoBloq`)) AS Destino,\n" +
+"     \n" +
+"     \n" +
+"     DP.`IdDescProd` AS IdDescProd,\n" +
+"     DP.`DescProd` AS DescProd\n" +
+"FROM\n" +
+"     ProveClien PC  INNER JOIN Peso P ON PC.`IdProveClien` = P.`IdProveClien`\n" +
+"     INNER JOIN ConductorVehiculo CV ON P.`IdConductorVehiculo` = CV.`IdConductorVehiculo`\n" +
+"     INNER JOIN DestinoBloq DB ON P.`IdDestinobloq` = DB.`IdDestinobloq`\n" +
+"     INNER JOIN DescProd DP ON P.`IdDescProd` = DP.`IdDescProd`\n" +
+"     INNER JOIN Conductor C ON CV.`IdConductor` = C.`IdConductor`\n" +
+"     INNER JOIN Vehiculo V ON CV.`IdPlaca` = V.`IdPlaca`\n" +
+"     INNER JOIN DestinoDesc DD  ON DB.`IdDestinoDesc` = DD.`IdDestinoDesc`\n" +
+"	 INNER JOIN Destino D  ON DD.`IdDestino` = D.`IdDestino`\n" +
+"   \n" +
+"     \n" +
+"\n" +
+"     where V.`Placa`='"+Campo.getPlaca()+"' and P.`Estado`=\"T\" \n" +
+"     \n" +
+"     order by P.IdPeso Desc limit 14000;";
+            }
+            
+            
 
-            CallableStatement Proc = Con.prepareCall(" CALL PAGetPeso(?,?,?)");
-Proc.setInt(1, Campo.getIdPeso());
-Proc.setString(2, Campo.getPlaca());
-Proc.setString(3, Campo.getOpcion());
+            CallableStatement Proc = Con.prepareCall(SQL);
+//Proc.setInt(1, Campo.getIdPeso());
+//Proc.setString(2, Campo.getPlaca());
+//Proc.setString(3, Campo.getOpcion());
   
 Proc.execute();
             ResultSet rs = Proc.executeQuery();

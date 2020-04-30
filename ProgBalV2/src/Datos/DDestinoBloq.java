@@ -80,12 +80,42 @@ String[] titulos = {"ID","DESTINO"};
         modelo = new DefaultTableModel(null, titulos);
 
         try {
-
-            CallableStatement Proc = Con.prepareCall(" CALL PAGetDestinoBloq(?,?,?,?)");
-Proc.setInt(1, Campo.getIdDestinoBloq());
-Proc.setString(2, Campo.getDestinoDes());
-Proc.setString(3, Campo.getCodDestinoBloq());
-Proc.setString(4, Campo.getOpcion());
+        String SQL="";
+        
+            if(Campo.getOpcion().equals("TODO")){
+SQL="   select DB.IdDestinoBloq, DB.DestinoBloq, DD.DestinoDes, D.Destino from Destino D \n" +
+"    inner join (DestinoDesc DD \n" +
+"    inner join DestinoBloq DB \n" +
+"    on DD.IdDestinoDesc=DB.IdDestinoDesc) \n" +
+"    on D.IdDestino=DD.IdDestino \n" +
+"    where DB.Estado=1\n" +
+"    order by DB.IdDestinoBloq desc;\n" +
+"     ";
+            }
+            
+             if(Campo.getOpcion().equals("DEST")){
+SQL=" select DB.IdDestinoBloq, DB.DestinoBloq, DD.DestinoDes, D.Destino from Destino D \n" +
+"    inner join (DestinoDesc DD inner join DestinoBloq DB on DD.IdDestinoDesc=DB.IdDestinoDesc)\n" +
+"    on D.IdDestino=DD.IdDestino \n" +
+"    where DD.DestinoDes like concat('%','"+Campo.getDestinoDes()+"','%')\n" +
+"     and DB.Estado=1\n" +
+"    order by DB.IdDestinoBloq desc";
+            }
+             
+             if(Campo.getOpcion().equals("IDDE")){
+SQL="select DB.IdDestinoBloq, DB.DestinoBloq, DD.DestinoDes, D.Destino from Destino D \n" +
+"    inner join (DestinoDesc DD inner join DestinoBloq DB on DD.IdDestinoDesc=DB.IdDestinoDesc)\n" +
+"    on D.IdDestino=DD.IdDestino \n" +
+"    where DB.IdDestinoBloq='"+String.valueOf(Campo.getIdDestinoBloq())+"' \n" +
+"     and DB.Estado=1\n" +
+"    order by DB.IdDestinoBloq desc;";
+            }
+            
+            CallableStatement Proc = Con.prepareCall(SQL);
+//Proc.setInt(1, Campo.getIdDestinoBloq());
+//Proc.setString(2, Campo.getDestinoDes());
+//Proc.setString(3, Campo.getCodDestinoBloq());
+//Proc.setString(4, Campo.getOpcion());
 Proc.execute();
             ResultSet rs = Proc.executeQuery();
             while (rs.next()) {

@@ -42,6 +42,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Enumeration;
 import javax.swing.JTable;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.engine.JasperReport;
 /**
  *
  * @author Victor
@@ -53,7 +58,7 @@ public class PPeso extends javax.swing.JFrame {
      */
     public PPeso() {
         initComponents();
-        TxtIdConductorVehiculo.setVisible(true);
+        TxtIdConductorVehiculo.setVisible(false);
 //Arrancar();
         
         
@@ -493,58 +498,56 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
     }
 
     
-//
-//    public void Imprimir() {
-//    
-//        if (Integer.parseInt(TxtPesoCE.getText())>Integer.parseInt(TxtPesoCS.getText())) {
-//            Map p = new HashMap();
-//           
-//            
-//             p.put("IDPESOS", Integer.parseInt(TxtIdPeso.getText()));
-//            JasperReport report;
-//            JasperPrint print;
-//
-//            try {
-//                report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-//                        + "/src/Reportes/TicketBalanzaP.jrxml");
-//
-//                print = JasperFillManager.fillReport(report, p, Con);
-//                JasperPrintManager.printReport(print, false);
-//                
-//                
-////                JasperViewer view = new JasperViewer(print, true);
-////                view.setTitle("Ticket Balanza");
-////                view.setVisible(false);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }else{
-//            Map p = new HashMap();
-//           
-//            
-//             p.put("IDPESOS", Integer.parseInt(TxtIdPeso.getText()));
-//            JasperReport report;
-//            JasperPrint print;
-//
-//            try {
-//                report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-//                        + "/src/Reportes/TicketBalanzaC.jrxml");
-//
-//                print = JasperFillManager.fillReport(report, p, Con);
-//                JasperPrintManager.printReport(print, false);
-//                
-//                
-////                JasperViewer view = new JasperViewer(print, true);
-////                view.setTitle("Ticket Balanza");
-////                view.setVisible(false);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//           
-//       
-//
-//    }
+
+    public void Imprimir() {
+    
+        if (Integer.parseInt(TxtPesoCE.getText())>Integer.parseInt(TxtPesoCS.getText())) {
+            Map p = new HashMap();
+           
+            
+             p.put("IDPESOS", Integer.parseInt(TxtIdPeso.getText()));
+            JasperReport report;
+            JasperPrint print;
+
+            try {
+                report = JasperCompileManager.compileReport("C:/SOFT/Reportes/TicketBalanzaP.jrxml");
+
+                print = JasperFillManager.fillReport(report, p, Con);
+                JasperPrintManager.printReport(print, false);
+                
+                
+//                JasperViewer view = new JasperViewer(print, true);
+//                view.setTitle("Ticket Balanza");
+//                view.setVisible(false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else{
+            Map p = new HashMap();
+           
+            
+             p.put("IDPESOS", Integer.parseInt(TxtIdPeso.getText()));
+            JasperReport report;
+            JasperPrint print;
+
+            try {
+                report = JasperCompileManager.compileReport("C:/SOFT/Reportes/TicketBalanzaC.jrxml");
+
+                print = JasperFillManager.fillReport(report, p, Con);
+                JasperPrintManager.printReport(print, false);
+                
+                
+//                JasperViewer view = new JasperViewer(print, true);
+//                view.setTitle("Ticket Balanza");
+//                view.setVisible(false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+           
+       
+
+    }
 
     public void PSetPeso() {
 
@@ -579,8 +582,8 @@ Nom.getColumnModel().getColumn(Num).setPreferredWidth(0);
                         DefaultValue.Text(TxtObservS.getText()), 
                         Estado, 
                        
-                        //Integer.parseInt(PMenu.LblIdUsuario.getText()),               CAMBIAR ESTE CAMPO CUANDO ESTE LA VENTANA PRINCIPAL
-                        Integer.parseInt("1"),
+                       Integer.parseInt(PMenu.LblIdUsuario.getText()),             
+                       // Integer.parseInt("1"),
                         DefaultValue.Number(TxtIdProveClien.getText()),
                         123456,//CAMBIAR CODIGO PRECINTO
                         DefaultValue.Number(TxtIdConductorVehiculo.getText()),
@@ -2339,7 +2342,7 @@ String ID=JOptionPane.showInputDialog("Ingresar ID para busqueda:");
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void BtnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminar1ActionPerformed
-//        Imprimir();        // TODO add your handling code here:
+   Imprimir();        // TODO add your handling code here:
     }//GEN-LAST:event_BtnEliminar1ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed

@@ -64,7 +64,6 @@ public class PMenu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
         MANTENIMIENTO = new javax.swing.JPanel();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
@@ -281,27 +280,6 @@ public class PMenu extends javax.swing.JFrame {
             }
         });
         jPanel7.add(jButton7);
-
-        jButton8.setBackground(new java.awt.Color(255, 255, 204));
-        jButton8.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
-        jButton8.setText("CONSULTA");
-        jButton8.setBorderPainted(false);
-        jButton8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton8.setFocusPainted(false);
-        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton8MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton8MouseExited(evt);
-            }
-        });
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-        jPanel7.add(jButton8);
 
         TabPestaña.addTab("", jPanel7);
 
@@ -559,11 +537,6 @@ PPeso Obj = new PPeso();
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-
-      //  Obj.setExtendedState(Obj.MAXIMIZED_BOTH);// TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
-
     private void jButton7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseEntered
         Dentro(jButton7);
     }//GEN-LAST:event_jButton7MouseEntered
@@ -571,14 +544,6 @@ PPeso Obj = new PPeso();
     private void jButton7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseExited
         Fuera(jButton7);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton7MouseExited
-
-    private void jButton8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseEntered
-        Dentro(jButton8);
-    }//GEN-LAST:event_jButton8MouseEntered
-
-    private void jButton8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseExited
-        Fuera(jButton8);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8MouseExited
 
     private void jButton10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseEntered
         // TODO add your handling code here:
@@ -743,7 +708,6 @@ PPeso Obj = new PPeso();
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

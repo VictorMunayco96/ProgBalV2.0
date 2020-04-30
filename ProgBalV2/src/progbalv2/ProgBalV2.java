@@ -6,8 +6,10 @@
 package progbalv2;
 
 import Presentacion.PDespacho;
+import Presentacion.PLogin;
 import Presentacion.PPeso;
 import javax.swing.JOptionPane;
+import Datos.Conexion;
 
 /**
  *
@@ -19,8 +21,11 @@ public class ProgBalV2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      PPeso Obj = new PPeso();
+      PLogin Obj = new PLogin();
       Obj.setVisible(true);
+  
+//      Conexion Obj = new Conexion();
+//      Obj.Conexion();
     }
     
 }
